@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>RegGen Lab</title>
+  <script src="jquery.js"></script>
+  <script src="slides.js"></script>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+
+  <script>
+    $(function(){
+    $("#slides").slides({
+      play:20000,
+      pause:40000,
+      hoverPause:true,
+      fadeSpeed:10,
+      generatePagination:true
+    }
+    );
+    });
+  </script>
+  <script src="gtrack.js"></script>
+  <style>
+  	/*body{
+  background-image: url("images/final_figure_1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 50%;
+  /*background-color: #cccccc;*/}
+/*#content {
+  background-color: lightblue;
+  /*width: 100vw;*/
+
+}*/*/
+
+/*#sidebar_container{
+	background-color: lightblue;
+	}*/
+   </style>
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <h1>RegGen Lab</h1>
+        <!-- <div class="slogan"><b>Serving Society with Data Science & genomics</b></div> -->
+      </div>
+    </div>
+    <div id="content">
+      <!-- <div id="sidebar_container"> -->
+        <!-- <img class="paperclip" src="style/paperclip.png" alt="paperclip" /> -->
+      <!-- </div> -->
+      <!-- <div id="main_column"> -->
+        <!-- insert the page content here -->
+        <h1>Greetings!</h1>
+        <p style="font-size: 20px ; text-align:justify;">Our group encompasses people from a very diverse background. We work on problems related to data-sciences  and biological data-sets. Every biological event stems out as a result of more than one interacting omics layers like epigenome, transcriptome, etc.; also, the effect of a biological phenomenon ripple across such omics layers.  Therefore, our group having people from computer science and life science background, believe in an integrated approach to answering the questions in biology. We utilize multi-omics data, preferably in combination to investigate interesting questions in biology. The statistical and computational approaches employed in our methods with the biological standpoint is allowing us to put biology in great perspective and to ask better questions. Our group specializes in single-cell genomics, functional genomics, cancer genomics, and clinical genomics. Our ultimate aim is to serve society, to save and maintain the ecosystem and biodiversity.
+Some of the most exciting things happen in our lab. 
+</p>
+
+<br>
+
+<div class="slide" style="border:3px solid red; border-radius: 5px;">
+          <!-- insert your sidebar items here -->
+          <h4 style="font-size: 20px">Selected Publications (of lab members:)</h4>
+          <h5 style="text-align:right"></h5>
+          <a href="https://academic.oup.com/nar/article/46/W1/W141/5000022"><h4 style="font-size: 20px">CellAtlasSearch</h4></a>
+	  <p style="font-size: 20px">World's first search engine for single cell RNA-seq data.</p>
+	  <a href="https://genome.cshlp.org/content/early/2016/03/08/gr.201038.115"><h4 style="font-size: 20px">First comprehensive study on H2BK20ac ( a new mark of enhnacer) </h4></a>
+	  <p style="font-size: 20px">H3K27ac is used as a general marker of active enhancers. However, based on enhancer assays, omics profiling, and analysis of public datasets, another acetylation mark, H2BK20ac, is found to be the best enhancer predictor.</p>
+	  <a href="https://www.nature.com/articles/nbt.2596?proof=true&draft=collection"><h4 style="font-size: 20px">DFilter</h4></a>
+	  <p style="font-size: 20px">A detection algorithm that identifies regulatory features in ChIP-seq, DNase-seq and FAIRE-seq data more accurately than assay-specific algorithms.</p>
+	 </p>
+
+	  
+	  
+        </div>
+
+	<!-- <div id="slides">
+	  <div class="slides_container">
+
+	    <div class="slide">
+	      <h3>Utility of Single Cell Genomics</h3>
+	      <div style="float: right; display: block; width:305px height:200px; overflow:hidden; margin-left:2px;">
+		<a href="http://cellatlassearch.com/"><img src="images/cellatlas.jpeg" width="300" height="200" style="padding: 2px; background: white; border: 1px solid #888;"/></a>
+		<div style="clear:both;"></div>
+	      </div>
+	      <p><a href="http://cellatlassearch.com/">CellAtlasSearch</a>, for the first time, allows user query single-cell expression profiles to retrieve matching single cell or bulk expression data from over 2000 different studies. CellAtlasSearch Pipeline. The entire web-server is based on GPU framework. Expression profiles are stored as hash codes obtained through LSH. Like-samples are archived in the same bucket. Query expression data is first converted into hash code and then mapped to one of the buckets. User can query one or more single cell transcriptomes.</p>
+	    </div>
+
+
+
+	    <div class="slide">
+	      <h3>Cancer epigenome</h3>
+        <div style="float: right; display: block; width:305px height:200px; overflow:hidden; margin-left:2px;">
+        <a href="https://www.nature.com/articles/s41467-018-07261-3"><img src="images/cancer_epigenome.jpg" class="software-image" width="300" height="200" style="background-color:black;float:right"/></a>
+        <div style="clear:both;"></div>
+        </div>
+	      <p>Drug response of cancer is often dependent on underlying mutations and epigenome. With our collaborators we have recently shown that drug response of cancer cells is primed by epigenome and targeting epigentics modifiers can help in reducing plasticity of cancer cells <a href="https://www.nature.com/articles/s41467-018-07261-3">(Ankur et al, Nature communications)</a>. Now we are making new extended observations with chromatin interaction profiles of cancer cells. We are trying to figure out how insights from chromatin interactions can help in cancer therapeutics.</p>
+	    </div>
+
+	    <div class="slide">
+	      <h3>Functional Genomics</h3>
+	      <div style="float: right; display: block; width:305px height:200px overflow:hidden; margin-left:2px;">
+		<img src="images/om1.jpg" width="300" height="200" style="padding: 2px; background: white; border: 1px solid #888;"/>
+		<div style="clear:both;"></div>
+	      </div>
+	      <p>A large part of the genome is non-coding in nature, especially long non-coding RNA(lncRNA) genes, which have been annotated extensively because of the advances in the sequencing technologies, but their function is mostly unknown, some of them are associated with an array of functions: X chromosome inactivation, chromatin modification, transcription activation, nuclear transport. Although a few of the annotated lncRNA genes are linked to a vast array of cellular functions and disease conditions, a vast number of annotated lncRNA genes remain unclassified for any biological function. Experimental as well as computational efforts to unravel the functional roles of lncRNAs have yielded minimal results and remain challenging. To negate this, we have utilized multi-omics data, which is relatively consistent across the genome, to build models to predict the ontology-based functions of lncRNA genes.</p>
+
+	    </div>
+	  </div> -->
+	  <!-- <a href="#" class="nav prev"><i class="icon-chevron-left "></i></a> 
+	  <a href="#" class="nav next"><i class="icon-chevron-right "></i></a>  -->
+	</div>
+    </div>
+    <!-- <div id="footer">
+      <p id="footerleft"><img height=35 width=100 align="center" src="images/iiitd.png"/></p>
+      <p>Our research is supported by the | <a target="_blank" href="http://dbtindia.gov.in/"><img align="center" width=170 height=50 src="images/dbt.png"/> <strong>Department of Biotechnology </strong></a><!-- | <a target="_blank" href="http://www.nih.gov"> <img align="center" width=50 height=50 src="img/od.gif"/> <strong></strong></a> | -->
+    </div> 
+  </div>
+</body>
+</html>
