@@ -1,0 +1,702 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0075)http://collaborations.gis.a-star.edu.sg/~cmb6/kumarv1/dfilter/tutorial.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title></title>
+	<meta name="GENERATOR" content="OpenOffice.org 3.0  (Unix)">
+	<meta name="AUTHOR" content="Vibhor CMB">
+	<meta name="CREATED" content="20140506;17044700">
+	<meta name="CHANGEDBY" content="Vibhor CMB">
+	<meta name="CHANGED" content="20140903;14204500">
+	<meta name="Info 1" content="">
+	<meta name="Info 2" content="">
+	<meta name="Info 3" content="">
+	<meta name="Info 4" content="">
+	<meta name="CHANGEDBY" content="Vibhor CMB">
+	<style type="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		TD P { margin-bottom: 0in }
+		A:link { so-language: zxx }
+	-->
+	</style>
+</head>
+<body lang="en-US" dir="LTR">
+<div style="width:900px;  margin: 10px 20px 30px 50px; background:#DDDDDD;">
+
+<img src="./tutorial_files/GISlogo.jpeg" alt="Logo" height="150"> 
+
+<p style="margin-bottom: 0in">This tutorial is meant for
+understanding the utility of DFilter and EFilter for different kinds
+of data from next gen. sequencing. The topics covered are as such</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+	<li><p style="margin-bottom: 0in"><b>Using DFilter </b>
+	</p>
+<p style="margin-bottom: 0in">
+a) Installing <br>
+<a href="./tutorial.html#intro"> b) Introduction : peak detection, making wiggle track </a> <br>
+<a href="./tutorial.html#variable"> c) Variable peak width, assays and optimal parameters </a> <br>
+<a href="./tutorial.html#parameters"> d) Table for suggested parameter values for different assays </a> <br>
+ <a href="./tutorial.html#combine"> e) Combining multiple kinds of data </a> <br>
+ <a href="./tutorial.html#detail"> f) More detail option wise explanation </a> </p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<ol start="2">
+	<li>
+<a href="./tutorial.html#efilter"> </a><p style="margin-bottom: 0in"><a href="./tutorial.html#efilter"><b>Using EFilter </b></a></p>
+</li></ol>
+<p style="margin-bottom: 0in"><br>
+
+</p>
+<p style="margin-bottom: 0in"><br>
+
+</p><p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><font size="4"><b>Installing: </b></font>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+
+<p></p>
+<p style="margin-bottom: 0in"><b>Linux complied version:</b></p>
+<p style="margin-bottom: 0in">. unzip the compiled codes tar file (using command tar -xvf dfilter.tar.gz) and include the unzipped folder in PATH using command </p>
+<br>
+<p class="MsoNormal"><i> export PATH=path_of_DFilter_folder:$PATH </i> </p>
+<br>
+<p style="margin-bottom: 0in"><b>Matlab version: </b>
+</p>
+<p style="margin-bottom: 0in">. unzip the downloaded matlab codes. 
+</p>
+<p style="margin-bottom: 0in">. Compile tag2mat.c and findlimits.c
+and put in any folder in the $PATH 
+</p>
+<p style="margin-bottom: 0in">.include the dfilter-folder in matlab
+path and start using</p>
+<p style="margin-bottom: 0in"><br>
+</p><p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">_________________________________________________________</p>
+<p style="margin-bottom: 0in"><br>
+
+
+</p>
+<a id="intro">
+<p style="margin-bottom: 0in; page-break-before: always"><font size="5"><b>Using
+DFilter </b></font>
+</p>
+</a><a>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">DFilter has been made to detect
+regulatory regions and enriched sites using tag count data generated
+by next gen. sequencing. It has been made using generalization
+approach so that data from multiple kinds of assays can be analyzed.
+Those assays can be ChIP-seq, Dnase-seq, Mnase-seq, FAIRE-seq,
+ChIP-exo, 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><b>input formats: bed/bam/sam/bedGraph</b></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">DFilter version1.5 can take four kinds
+of input files. The raw tags files can be in 6-column bed file,
+bedgraph, bam or sam format. 
+</p>
+<p style="margin-bottom: 0in">The 6 column bed files containing tags
+has following information 
+</p>
+<p style="margin-bottom: 0in"><font size="2">Column 1: chromosome
+<br>Column 2: tag-start <br>Column 3: tag-end <br>Column 4: user
+defined <br>Column 5: user defined <br>Column 6: sign + or - </font>
+</p>
+<p style="margin-bottom: 0in">For 6 column bed file there is no need
+to pass any hint as it is default</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">For bam file users should pass the type
+information as: -f=bam 
+</p>
+<p style="margin-bottom: 0in">such as</p>
+<p><i>run_dfilter.sh -d=ChIP.bam -c=input-control.bam -o=peaks.bed
+-f=bam</i> -ks=60</p>
+<p><br><br>
+</p>
+<p>For paired-end bam or sam files additional option '-pe' should be
+provided otherwise it will treat the tags as single-end reads for
+peak calling. For paired end reads bam/sam file should be sorted
+according to tag-names for this purpose samtools can be used like
+this:</p>
+<p><br><br>
+</p>
+<p><i>samtools sort ChIP.bam &gt; sorted-ChIP.bam</i></p>
+<p><br><br>
+</p>
+<p>then use Dfilter command as:</p>
+<p><i>run_dfilter.sh -d=sorted-ChIP.bam -c=sorted-input-control.bam
+-o=peaks.bed -f=bam -pe -ks=60</i></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">For bedGraph file the command looks
+like :</p>
+<p><i>run_dfilter.sh -d=ChIP.bedGraph -c=input-control.bedGraph
+-o=peaks.bed -f=bedGraph</i> -ks=60</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><i><b>important: all the input tag or
+binned tag files should be in same format</b></i>. 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p> 
+</a><a id="bedgraph">
+<b> Note </b> <br>
+<p style="margin-bottom: 0in">An additional feature which makes
+DFilter unique, is that it can take binned tag-counts provided by
+user (in bedgraph format). Hence users can normalize the binned
+tag-count them-self before detecting enriched sites. Users could also
+divide binned tag count from one experiments by tags from other
+experiments in some special cases.</p>
+</a><a>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><b>Output files</b></p>
+<p style="margin-bottom: 0in">DFilter produces by default two output
+files. They are as such 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">First file: track-outfilename.bed :-
+this file is made for uploading to UCSC browser for visualisation
+purpose</p>
+<p style="margin-bottom: 0in">Second file: outfilename.bed :-
+contains the detail information about called peaks with following
+info: <br><br>chromosome : chromosome on which peak was detected
+<br>peak-start : starting position of peak <br>peak-end : end
+position of peak <br>maxScore : maximum score of Hotelling filter
+with in peak region <br>peak-center : location of maximum score with
+in peak region <br>-log10(P-value) : Calculated P-value using maximum
+score <br>Norm-tag-count : average tag-count with in peak regions.
+Tag counts are normalized by input and sequencing depth <br>FDR(%) :
+Estimated False detection rate for maximum score of peak 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><b>making wiggle tracks</b></p>
+<p style="margin-bottom: 0in">When “-wig” option is used DFilter
+makes wiggle track for sample tag data. It produces two kinds of</p>
+<p style="margin-bottom: 0in">wiggle tracks which can be uploaded to
+UCSC browser directly or after compressing (using gzip). The first
+wiggle file is named after the provided chip file name such as
+“ChIP.bam.wig” it contains tag-count signal of raw tags in the
+chip file. The second wiggle is named after the output file name
+(such as outfilename.bed.wig ). It contains signal after
+normalization and applications of Hotelling filter on tag-count
+profile. This is the output signal on which peak detection is done
+finally. Users can uploaded this to visualize locations which are
+noisy with original data tracks.</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+</a><a id="variable">
+<p style="margin-bottom: 0in"><font size="4"><b>Variable peak width,
+assays and optimal parameters</b></font></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+</a>
+<p style="margin-bottom: 0in; font-weight: normal">The most important
+parameter for DFilter would be to use 'zero mean' filter or 'non-zero
+mean' filter. For some assays the genuine sites can have wide
+enriched regions (such as H3K27me3, H3K9me3 H3K36me3). As well some
+assays, genuine tag profile has extremely narrow width such as
+transcription factor ChIP-seq. For such cases it is recommended to
+use non-zero mean kernel by using parameter '-nonzero'. The second
+most important parameter would be kernel width. <i>Dfilter-version1.5
+has been made sensitive enough to guess approximate kernel width</i>.
+However users can provide their own filter width. For guidance users
+can use kernel width provided in table-1 for different assays.
+Remember for non-zero mean kernel keep the kernel-width below 3kb (ie
+-bs=100 , ks=5-30 ). 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal">For directional
+regulatory regions (such as promoters) if users have training set, it
+is advised to use option '-dir' to increase sensitivity. However
+remember that if option '-dir' is used then the set of positives
+given to DFilter should consist of location of regulatory regions in
+only one direction. Such as for promoters, user should provide TSS
+locations of only positive strand genes. 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<a id="parameters">
+<p style="margin-bottom: 0in; page-break-before: always"><b>Table-1:
+</b><span style="font-weight: normal">Suggested parameters for
+different cases for best results:</span></p>
+</a><p style="margin-bottom: 0in"><a id="parameters"><font size="2"><b>Notice: Dfilter output
+peak files can processed get the desired peaks with p-value cutoff
+using command on linux : </b></font>  </a>
+</p>
+<table width="667" border="1" bordercolor="#000000" cellpadding="4" cellspacing="0">
+	<colgroup><col width="96">
+	<col width="63">
+	<col width="56">
+	<col width="316">
+	<col width="94">
+	</colgroup><tbody><tr valign="TOP">
+		<td width="96">
+			<p><font size="2">Assay- mark</font></p>
+		</td>
+		<td width="63">
+			<p><font size="2">Filter </font>
+			</p>
+			<p><font size="2">type</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">Filter</font></p>
+			<p><font size="2">width</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">DFilter command</font></p>
+		</td>
+		<td width="94">
+			<p><font size="2">Expected </font>
+			</p>
+			<p><font size="2">cut-off </font>
+			</p>
+			<p><font size="2">P-value</font></p>
+		</td>
+	</tr>
+	<tr valign="TOP">
+		<td width="96">
+			<p><font size="2">ChIP-seq</font></p>
+			<p><font size="2">Histone acetylations</font></p>
+			<p><font size="2">H3k27ac</font></p>
+			<p><font size="2">H3BK20ac</font></p>
+			<p><font size="2">H3K9ac</font></p>
+			<p><font size="2">H3K14ac</font></p>
+			<p><font size="2">and others</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">more focal histone methylations</font></p>
+			<p><font size="2">H3K4me2</font></p>
+			<p><br>
+			</p>
+		</td>
+		<td width="63">
+			<p><font size="2">Zero mean</font></p>
+			<p><font size="2">(default)</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">6kb</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-ks=60</font></p>
+			<p><font size="2">-bs=100</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">run_dfilter.sh -d=ChIP.bed -c=input-control.bed
+			-o=peaks.bed -ks=60 -lpval=6</font></p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><font size="2">for input flles in bam format:::::::</font></p>
+			<p><font size="2">run_dfilter.sh -d=ChIP.bam -c=input-control.bam
+			-o=peaks.bed -ks=60 -std=2 -f=bam -ks=60 -lpval=6</font></p>
+		</td>
+		<td width="94">
+			<p style="margin-bottom: 0.2in"><font size="2">1E-6 </font>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p><br>
+			</p>
+		</td>
+	</tr>
+	<tr valign="TOP">
+		<td width="96">
+			<p><font size="2">ChIP-seq</font></p>
+			<p><font size="2">Wide focal</font></p>
+			<p><font size="2">Histone methylations</font></p>
+			<p><font size="2">H3K4me3</font></p>
+			<p><font size="2">H3K4me1</font></p>
+			<p><br>
+			</p>
+		</td>
+		<td width="63">
+			<p><font size="2">Zero mean</font></p>
+			<p><font size="2">(default)</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">8-10kb</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-ks=100</font></p>
+			<p><font size="2">-bs=100</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">run_dfilter.sh -d=ChIP.bed -c=input-control.bed
+			-o=peaks.bed -ks=100 -lpval=6</font></p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+			<p><br>
+			</p>
+		</td>
+		<td width="94">
+			<p style="margin-bottom: 0.2in"><font size="2">1E-6 </font>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p><br>
+			</p>
+		</td>
+	</tr>
+	<tr valign="TOP">
+		<td width="96">
+			<p><font size="2">ChIP-seq</font></p>
+			<p><font size="2">Non-focal histone modifications</font></p>
+			<p><font size="2">H3K27me3</font></p>
+			<p><font size="2">H3K9me3</font></p>
+			<p><font size="2">H3K9me2</font></p>
+			<p><font size="2">H3K36me3</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">CLIP-seq data with non-focal profile</font></p>
+		</td>
+		<td width="63">
+			<p><font size="2">Non-zero</font></p>
+			<p><font size="2">mean</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-nonzero</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">1.5-3kb</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-kb=25</font></p>
+			<p><font size="2">-bs=100</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">run_dfilter.sh -d=ChIP.bed -c=input-control.bed
+			-o=peaks.bed -ks=20 -lpval=3 -nonzero</font></p>
+		</td>
+		<td width="94">
+			<p style="margin-bottom: 0.2in"><font size="2">1E-3 </font>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p><br>
+			</p>
+		</td>
+	</tr>
+	<tr valign="TOP">
+		<td width="96">
+			<p><font size="2">ChIP-seq</font></p>
+			<p><font size="2">Transcription</font></p>
+			<p><font size="2">factors</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">RIP-seq RNA binding proteins, focal CLIP-seq</font></p>
+		</td>
+		<td width="63">
+			<p><font size="2">Non-zero</font></p>
+			<p><font size="2">mean</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-nonzero</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">0.5-2kb</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-ks=20</font></p>
+			<p><font size="2">-bs=50</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">run_dfilter.sh -d=ChIP.bed -c=input-control.bed
+			-o=peaks.bed -ks=10 -lpval=6 -nonzero -refine</font></p>
+		</td>
+		<td width="94">
+			<p style="margin-bottom: 0.2in"><font size="2">1E-6 </font>
+			</p>
+			<p style="margin-bottom: 0.2in"><br><br>
+			</p>
+			<p><br>
+			</p>
+		</td>
+	</tr>
+	<tr valign="TOP">
+		<td width="96">
+			<p><font size="2">Open-chromatin</font></p>
+			<p><font size="2">assays </font>
+			</p>
+			<p><font size="2">Dnase-seq</font></p>
+			<p><font size="2">FAIRE-seq</font></p>
+			<p><font size="2">Mnase-seq</font></p>
+			<p><br>
+			</p>
+		</td>
+		<td width="63">
+			<p><font size="2">Zero mean</font></p>
+			<p><font size="2">(default)</font></p>
+		</td>
+		<td width="56">
+			<p><font size="2">4-5kb</font></p>
+			<p><br>
+			</p>
+			<p><font size="2">-ks=50</font></p>
+			<p><font size="2">-bs=100</font></p>
+		</td>
+		<td width="316">
+			<p><font size="2">run_dfilter.sh -d=Dnase-seq.bed -o=peaks.bed
+			-ks=50 -lpval=2 </font>
+			</p>
+		</td>
+		<td width="94">
+			<p style="margin-bottom: 0.2in"><font size="2">1E-2</font></p>
+			<p><br>
+			</p>
+		</td>
+	</tr>
+</tbody></table>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<a id="combine">
+<p style="margin-bottom: 0in"><b>Combining multiple kinds of data</b></p>
+</a><p style="margin-bottom: 0in"><a id="combine"><br> </a>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal">A unique feature
+in DFilter which makes it more generalized tool is to combine tag
+profiles from different assays to find regulatory elements. This
+feature of DFilter is useful when 2 or more libraries</p>
+<p style="margin-bottom: 0in; font-weight: normal">are representative
+of same regulatory element, such as multiple histone acetylations at
+active enhancers or different assays to infer open-chromatin.</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><b>Some examples </b>
+</p>
+<p style="font-weight: normal">for detecting active promoters using
+histone modifications 
+</p>
+<p style="margin-bottom: 0in">run_dfilter.sh
+-d=H3K4me3-tags.bed,H4K20me1-tags.bed -c=control-tags.bed -o=out.bed
+-lpval=6 -pos=promoters.bed -dir</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in">or more than one ChIP-seq to support TF
+site prediction:</p>
+<p style="margin-bottom: 0in">run_dfilter.sh -d=oct4-tags.bed,
+sox2-tags.bed -c=control-tags.bed -o=out.bed -nonzero -bs=50 -ks=30
+-pm=300</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><span style="font-weight: normal">for
+inferring open-chromatin from multiple assays</span></p>
+<p style="margin-bottom: 0in; font-weight: normal">run_dfilter.sh
+-d=Dnase-seq.bed,FAIRE-seq.bed,ATAC-seq.bed -o=open-chromatin.bed -bs
+=100 -ks=50 -lpval=2 
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<a id="detail">
+<p style="margin-bottom: 0in"><font size="4"><b>More detail option wise
+explanation:</b></font></p> </a>
+<p style="margin-bottom: 0in; font-weight: normal">Contact your
+system administrator to have this file installed. 
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-d=ChIPfiles</b></font>
+filenames of sample, containing tags from high throughput sequencing.
+More than one filename can be given. The files can be in 6-column bed
+format,bam, sam or bedGraph format. </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-c=INPUTfiles</b></font>
+filenames of control input tags, more than one filename is given.
+same format as ChIPfile if more than one input control file is given
+then it should be equal to number of sample filename. (optional) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-o=OUPUTfile</b></font>
+single filename to save predicted regions (compulsory) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#ff3333"><b>-lpval=value</b></font><font color="#ff3333">
+</font>a floating point number to decide threshold to detect region
+after calculating scores. Default is -lpval=5 ( threshold P-value
+=1E-5 ) (optional) </font></font>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-f=bam/sam/bed/bedgraph</b></font>
+the format of input either it is bam, sam,bedGraph or bed (6 column
+bed file) default input is assumed to be in bed format </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b><span style="background: transparent">-pos=bedFile</span></b></font><font color="#eb613d"><span style="background: transparent">
+</span></font>the name of 3 column bed file containing set of
+positives (optional) . </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><i>(
+When some possible locations are known in advance they can be given
+as training set)</i></font></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#ff3333"><b>-bs=basepair</b></font><font color="#ff3333">
+</font>bin size in form of base pair, default=100 basepairs
+(optional) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#ff3333">-</font><font color="#ff3333"><b>ks=kernel_size</b></font>
+size of kernel in form of bins. default=100 bin (optional) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-nonzero</b></font><font color="#eb613d">
+</font>to use kernels with non-zero mean (optional), by default it
+uses zero mean kernel </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt">for
+pattern recognition. non-zero mean kernel is good for transcription
+factors ChIP-seq or signals with variable width like H3K27me3 </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#ff3333"><b>-wig</b></font><font color="#ff3333">
+</font>to save wiggle track of raw signal and filtered signal,
+resolution same as bin-size </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-pe
+</b></font>if the tags are paired end. For paired-end read provide
+BAM/SAM file </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><i>(remember
+to sort tags for paried end mode according to name before passing as input)</i></font></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-tagsize=basepair</b></font>
+the size of tags in basepairs. Default is 200bp. for automatic
+finding of tagsize use "-tagsize=auto" </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-refine</b></font>
+to refine the center of detected region </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-tw=basepairs
+</b></font>truncate wider peaks which are more wide than given
+basepair width. (optional) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-redund=N</b></font><font color="#eb613d">
+</font>N is the number of tags allowed with same orientation and
+location Default=1 </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d">-</font><font color="#eb613d"><b>pm=basepairs</b></font>
+merges the regions which are closer than given basepair distance.
+(optional) </font></font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><b>-</b><font color="#eb613d"><b>dir
+</b></font>to run dfilter taking directionality of regultory site
+such as promoters (optional)</font></font></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<a id="efilter">
+<p style="margin-bottom: 0in"><b><font size="5">Using EFilter</font></b>
+</p>
+
+</a><p style="margin-bottom: 0in"><a id="efilter"><br>
+</a>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">EFilter
+is signal estimation tool which combines tag-count signals from
+multiple assays or ChIP-seq to predict gene expression. With current
+version (v1.5) it is possible to use any ChIP-seq, Dnase-seq
+data-set. The current version of EFilter finds the rank-invariant
+genes by predicting expression in first round and comparing with its
+own expression profiles. Hence now there is no need to give
+information about ChIP-seq like old version. The current version is
+also made such as users can opt for not doing gene-specific
+correction of expression (using option “-nocorr”). By default
+EFilter does correction for gene-specific biases by using
+pre-calculated residuals. When we do not perform gene-specific
+correction we expect the predicted expression to be more suitable for
+motif based analysis, such as inferring gene-networks. </font>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-d=ChIPfiles</b></font>
+<font face="Serif"><font size="2"><span style="font-weight: normal">filenames
+of sample, more than one filename can be given. The input file</span></font></font>
+<font face="Serif"><font size="2">containing tags from high throughput
+sequencing. (compulsory)</font></font></font></font></font></p>
+
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-c=INPUTfiles</b></font>
+filenames of control input tags, more than one filename can be
+given.'</font></font></font></p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt">if
+more than one input control file is given then it should be equal to
+number of sample filename. (optional)'</font></font></font></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><a name="DDE_LINK"></a><font color="#a020f0"><font face="lucidatypewriter, monospace"><font size="2"><font color="#eb613d"><b>-f=bam
+/sam/ bed</b></font> <font color="#000000"><font face="Serif">format
+of the input tag file it can be bam , bed or sam file. The default is
+6 column bed format.</font></font></font></font></font></p>
+
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-g=geneFile
+</b></font>the downloaded geneFile (compulsory)</font></font></font></p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-m=matrixFile</b></font>
+the downloaded matrixFile (compulsory)'</font></font></font></p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b><span style="background: transparent">-o=output</span></b></font><span style="background: transparent">
+</span>output file (compulsory)'</font></font></font></p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt"><font color="#eb613d"><b>-nocorr</b></font>
+This option is used when no correction is done for gene specific
+biases </font></font></font>
+</p>
+<p style="margin-bottom: 0in"><font color="#000000"><font face="Liberation Serif, serif"><font size="2" style="font-size: 11pt">it
+will reduce correlation with actual expression but increase
+correlation with motif occurrences <font color="#008000">(optional)</font>'</font></font></font></p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+<p style="margin-bottom: 0in"><br>
+</p>
+</li></div>
+
+
+</body></html>

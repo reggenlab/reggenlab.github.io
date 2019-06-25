@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0079)http://collaborations.gis.a-star.edu.sg/~cmb6/kumarv1/dfilter/dfilter-FAQs.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title></title>
+	<meta name="GENERATOR" content="OpenOffice.org 3.0  (Unix)">
+	<meta name="AUTHOR" content="Vibhor CMB">
+	<meta name="CREATED" content="20140603;13520500">
+	<meta name="CHANGED" content="0;0">
+	<meta name="Info 1" content="">
+	<meta name="Info 2" content="">
+	<meta name="Info 3" content="">
+	<meta name="Info 4" content="">
+	<style type="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+	-->
+	</style>
+</head>
+<body lang="en-US" dir="LTR">
+<div style="width:900px;  margin: 10px 20px 30px 50px; background:#DDDDDD;"> 
+<p style="margin-bottom: 0in"><font size="4"><b>Why should I use
+DFilter ?</b></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">There
+are already many peak calling tools for next gen.. sequencing
+tag-profiles, why one should use DFilter. The answer to this question
+has been answered in first figure of the manuscript (Kumar et al.
+Nature biotechnology, 2013). One can notice that when input control
+in not provided the most popular program fail to provide genuine
+enriched sites(peaks). In many projects it is too costly to generate
+input control such as while doing large number of chip-seq it is too
+expensive to have one input control for each chip-seq. Especially for
+valuable clinical samples from large cohorts. </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">Some
+assays do not need input control, such as Dnase-seq, FAIRE-seq etc.
+Hence there is risk of detecting false peaks (for example in
+duplicated genomic regions). DFilter provides good performance even
+in absence of control and can easily avoid such artifact due to
+duplicated regions and other bias, due to use of zero-mean and
+matched filter. </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">Dfilter
+also provides a uniform platform to analyze all kinds of next gen.
+tag profiles from different kinds of assays.</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in"><font size="4"><b>I am not able to run
+DFilter on my PC or server. What should I do ?</b></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">Just
+write an email to author ( kumarv1(at) gis.a-star.edu.sg).<u> </u><i><u>It
+would be wise to create a temporary guest account in your PC or
+server and let  the authors install the DFilter for you</u></i>.
+Dfilter would  also be available on Basespace, so researchers having
+data on Basespace do not have to install it in their computer.   </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in"><font size="4"><b>What should be the
+P-value threshold for peak count ?</b></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">This
+is an open question and other peak calling tools are also struggling
+with the same issue. However we have figured out the trend in P-value
+for different kinds of assays and DFilter parameters. This can be
+listed below</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">a)
+for focal histone chip-seq such as H3K27ac, H3K4me3 etc (using zero
+mean filter – default) : P-value below 1E-6 (or 1E-7)  would be
+good. In other words 6<sup>th</sup> column in peak file should be
+above 6 or 7.</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">b)
+for transcription factor chip-seq (using option -nonzero ) : P-value
+below 1E-6  would be good. In other words 6<sup>th</sup> column in
+peak file should be above 6 or 7.</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">c)for
+wide peak chip-seq such as H3K36me3, H2K27me3 etc (using option
+-nonzero ) : P-value below 1E-3  would be good. In other words 6<sup>th</sup>
+column in peak file should be above 2.5 or 3.</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<ol type="i" start="500">
+	<li><p style="margin-bottom: 0in; font-weight: normal"><font size="3">for
+	open chromatin assays such as Dnase-seq, FAIRE-seq etc  : P-value
+	below 1E-3  would be good. In other words 6<sup>th</sup> column in
+	peak file should be above 3.</font></p>
+</li></ol>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">However
+it advisable to visualize the peaks in UCSC browser after making
+custom track of your data (using option -wig), to make sense of
+P-value. </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">Hence
+first run DFilter with low stringency (-std=2) to get high number of
+peaks then use awk command </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">to
+choose peaks above certain threshold. ( awk '$6 &gt; threshold' 
+peaks.bed &gt; new-peaks.bed )</font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in"><font size="4"><b>What could be the
+benefit of Normalized tag count for peaks (Norm_tag_count) ?</b></font></p>
+<p style="margin-bottom: 0in; font-weight: normal"><font size="3">The
+normalized tag count is the mean tag count in peaks after
+normalization for sequencing depth and input control signal. It could
+provide an initial idea of differential peaks among different
+libraries. Sometimes it is wise to choose peaks according to
+normalized tags counts also, especially if you are not sure that
+parameters you passed to DFilter was suitable for your assay or not
+(but it is rare).   </font>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal"><br>
+</p>
+<p style="margin-bottom: 0in; font-weight: normal">   
+ <!-- comparison of DFilter to MACS, F-seq, ZINBA, QUEST, Findpeaks and SICER is done in the manuscript but users are welcome to compare against other tools also such as Sissrs, SPP, NucleR, NarrowPeaks, Homer and many other for peak-calling  in tag-profile of ChIP-seq, DNase-seq, FAIRE-seq, ATAC-seq, MNase-seq, RIP-seq, CLIP-seq, ChIP-exo, Sono-seq and other siimlar assays -->
+
+
+<meta name="keywords" content="peak-calling peaks compare MACS F-seq ZINBA QUEST Findpeaks SICER ChIP-seq DNase-seq FAIRE-seq ATAC-seq MNase-seq RIP-seq CLIP-seq ChIP-exo Sono-seq ">
+
+</p>
+
+
+</div></body></html>
