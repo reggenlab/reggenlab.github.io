@@ -67,8 +67,10 @@
 
 						<div class="inner">
 								  <h3 style="color:green;">Installation </h3>
-								  <p>To install the package one of the following commands can be used. 
-								  <br><pre><code><br>R CMD INSTALL UniPath_0.1.0.tar.gz</pre></code></br>
+								  <p>To install the package use following command. 
+								  <br><pre><code><font color="black" face="arial">library(devtools)<br>install_github("reggenlab/UniPath")</pre></code></font>
+								  <p>User can also install package using . tar.gz file. <a href=http://reggen.iiitd.edu.in:1207/unipath_data/Data/UniPath_0.1.0.tar.gz><font color="blue" face="arial"> Click here</font><font color="black" face="arial"> to download UniPath_0.1.0.tar.gz file. </a></font>
+								  <br><pre><code><font color="black" face="arial">R CMD INSTALL UniPath_0.1.0.tar.gz</pre></code></br></font>
 								<p>In case of installation issues, check for the dependencies 
 								  associated with the package. They can be installed from the following links:
 								  
@@ -118,7 +120,7 @@
 						          <p><pre><code><font face="arial" color="black">##First set up a working directory<br>setwd(system.file("extdata", package="UniPath"))<br>globalaccess = global_access("GSE116248_peaks.txt","reference_peaks_human.txt","global_accessibility_score_human.csv")</pre></code></font>
 						          
 								  <p> User can also perform imputation of scATAC-seq data as shown below. Imputation improves the quality of data, thus it's a user choice. For this tutorial, we have used Drimpute for imputation which is time consuming task.
-								  Therefore, imputed keratinocytes data is a part of this package. Raw count file used for imputation used  below as well as other additional files can be downloaded from the link <a href=http://reggen.iiitd.edu.in:1207/unipath_data/Data/scATACseq/GSE116248/><font color="blue" face="arial">http://reggen.iiitd.edu.in:1207/unipath_data/Data/scATACseq/GSE116248/. </a></font> 
+								  Therefore, imputed keratinocytes data is a part of this package. Raw count file used for imputation used  below as well as other additional files can be downloaded from the link <a href=http://reggen.iiitd.edu.in:1207/unipath_data/Data/scATACseq/GSE116248/GSE116248_counts.csv><font color="blue" face="arial"> Click here </font><font face="arial" color="black"> to download GSE116248_counts.csv file. </a></font> 
 								  <p><pre><code><font face="arial" color="black">imputed_count = drimpute("GSE116248_counts.csv")</pre></code></font>
 								  <h3 style="color:green;">Conversion of scATAC-seq profiles into pathway enrichment scores</h3>
 					              <p>UniPath provides two methods for normalization of scATAC-seq profiles in each cell, one is global accessibility score and other is using local accessibility score . After normalizing scATAC-seq profiles, peaks having high normalized counts are considered as foreground and all peak set is used as a null or background model. Then, the nearest gene within 1MBp of the peak is considered for 
@@ -208,22 +210,11 @@
 									<a class="link"><img src="images/pic9.jpg"></a>
 									<a class="link"><img  src="images/pic10.jpg"></a>
 									</figure>
-									<p>Above figure shows an increase in the gradient of a pathway in NSCLC TS cells</p>
+									<p>Above figure shows an increase in the gradient of a pathway in NSCLC TS cells. </p>
 
 </div>
 </section>			
-				<!-- Footer -->
-			<footer id="footer">
-				<div class="copyright">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
-					</ul>
-					<p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
-				</div>
-			</footer>
+				
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
