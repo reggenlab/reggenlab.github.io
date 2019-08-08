@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+
+<!DOCTYPE HTML>
 
 <html>
 	<head>
@@ -45,7 +46,7 @@
 					<header>
 						<h2 class="project-name"><font color="white" face = "arial"><center>UniPath</h2></font><center>
 						<h3><font color="white" face="arial"><center>Overview</h3></font><center>
-						<p><font size= "4" face="arial"> UniPath provides robust statistical methods to represent every single cell using pathway and gene-set enrichment scores. It can be used with both single cell RNA-seq and single cell ATAC-seq profile with scalability for atlas scale data-sets. Unipath comes with several features like psuedo-temporal ordering using pathway scores and unconventional way of enumerating differences between two cell populations</font></p>
+						<p><font size= "4" face="arial"> UniPath provides robust statistical methods to represent every single cell using pathway and gene-set enrichment scores. It can be used with both single cell RNA-seq and single cell ATAC-seq profile with scalability for atlas scale data-sets. Unipath comes with several features like psuedo-temporal ordering using pathway scores and unconventional way of enumerating differences between two cell populations.</font></p>
 					</header>
 				</div>
 			</section>
@@ -59,64 +60,100 @@
 						<div class="inner">
 							<!-- 2 Columns -->
 									<div class="col col1">
-									  <h3 style="color:blue;">Introduction </h3>
-									  <p>This vignette gives detailed account on workflow of UniPath tool for analyzing single cell expression data and single cell open chromatin profiles in pathway domain. UniPath is a steadfast statistical method for getting important biological insights from single cells characterized in terms of pathway activity scores and studying temporal dynamics. UniPath is a scalable platform allowing pre-processing and analysis of thousands of single cells by exploiting heterogeneity among cells and uncovering biologically relevant pathways. UniPath can help users with accurate identification of cell types, signaling pathways and doublet cells. Besides these, user can also perform clustering and pseudo temporal ordering of single cells in pathway space. This may allow analysis of relevant pathways and genes on single cell lineage transitions or potency.</p>
+									  <h3 style="color:green;">Introduction </h3>
+									  <p>This vignette gives a detailed account on the workflow of UniPath tool for analyzing single cell expression data and single cell open chromatin profiles in pathway domain. UniPath is a steadfast statistical method for getting important biological insights from single cells characterized in terms of pathway activity scores and studying temporal dynamics. UniPath is a scalable platform allowing pre-processing and analysis of thousands of single cells by exploiting heterogeneity among cells and uncovering biologically relevant pathways. UniPath can help users with accurate identification of cell types, signaling pathways and doublet cells. Besides these, the user can also perform clustering and pseudo temporal ordering of single cells in pathway space. This may allow the analysis of relevant pathways and genes on single cell lineage transitions or potency.</p>
 									</div>
 								</div>
 
 						<div class="inner">
-								  <h3 style="color:blue;">Installation </h3>
-								  <p>install.packages("UniPath") </br><h3 style="color:blue;">
-								Usage and workflow</h3><p>For single cell data analysis, UniPath package comes with precompiled mouse and human null model data.  Also, for transformation of single cell gene expression data into pathway or gene-set enrichment scores, package contains pathway annotation and gene set marker files.Loading data files
-								The analysis of single cells starts by loading following data files:<br />
+								  <h3 style="color:green;">Installation </h3>
+								  <p>To install the package one of the following commands can be used. 
+								  <br><pre><code><br>R CMD INSTALL UniPath_0.1.0.tar.gz</pre></code></br>
+								<p>In case of installation issues, check for the dependencies 
+								  associated with the package. They can be installed from the following links:
+								  
+								  <li>netbiov: <a href="http://bioconductor.org/packages/release/bioc/html/netbiov.html"><font face="arial" color="blue">http://bioconductor.org/packages/release/bioc/html/netbiov.html</font></a></li>
+								  <li>vegan: <a href="https://cran.r-project.org/web/packages/vegan/index.html"><font face="arial" color="blue">https://cran.r-project.org/web/packages/vegan/index.html</font></a></li>
+								  <li>FNN: <a href="https://cran.r-project.org/web/packages/FNN/index.html"><font face="arial" color="blue">https://cran.r-project.org/web/packages/FNN/index.html</font></a></li>
+								  <li>igraph: <a href="https://cran.r-project.org/web/packages/igraph/readme/README.html"><font face="arial" color="blue">https://cran.r-project.org/web/packages/igraph/readme/README.html</font></a></li>
+								  <li>preprocessCore: <a href="https://bioconductor.org/packages/release/bioc/html/preprocessCore.html"><font face="arial" color="blue">https://bioconductor.org/packages/release/bioc/html/preprocessCore.html</font></a></li>
+								  <li>GenomicRanges: <a href="https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html"><font face="arial" color="blue">https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html</font></a></li>
+	                              
+								  <p>For other applications of UniPath, we suggest users to install DrImpute, ggplot2 and reshape2 packages. Also, we have used EmpiricalBrownsMethod package from R.
+	
+								
+								<h3 style="color:green;">Usage and workflow</h3><p>For single cell data analysis, UniPath package comes with a precompiled mouse and human null model data.  Also, for transformation of single cell gene expression data into pathway or gene-set enrichment scores, the package contains pathway annotation and gene set marker files.
+								The analysis of single cells starts by loading following data files:<br/>
 						
 								•	Mouse/human null model data matrix<br/>
 								•	Gene set maker file<br/>
-								•	Gene expression matrix<br/>
+								•	Gene expression matrix (Where genes should be in rows and samples/cells should be in columns). Ensure that genes are set as row names of the matrix. <br/>
 						
-								We have use mouse lung data (GSE52583, Treutlein, Barbara et al.) consisting of 23007 genes and 194 cells for this tutorial.
-
-						<br><pre><code><font face="arial" color="black">Library(UniPath)<br>##Load all data files <br>data("mouse_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("GSE52583_expression_data")</br></pre></code></font>
+								We have used mouse lung data (GSE52583, Treutlein, Barbara et al.) consisting of 23007 genes and 194 cells for this tutorial. For example:
+								
+						<br><pre><code><font face="arial" color="black">library(UniPath)<br>##Load all data files <br>data("mouse_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("GSE52583_expression_data")</br></pre></code></font>
+						<p> For tutorial purpose, in-built data is provided but users can also read or load their own input data files.</p>
 						</div>
+						
 						<div class="inner">
-								<h3 style="color:blue;">Conversion of gene expression FPKM value to P-value</h3>
+								<h3 style="color:green;">Conversion of gene expression FPKM value to P-value</h3>
 								<p>Next, we transformed gene FPKM values to p-values using individual cell’s mean and standard deviation based on the assumption that non-zero FPKM value in cell follows log normal distribution.</p>
 								<pre><code><font face="arial" color="black">##Converting mouse null data into p-values<br>Pval = binorm(mouse_null_data)<br>##Converting gene expression data into p-values<br>Pval1 = binorm(expression_data)</pre></code></font>
-								<h3 style="color:blue;">Combining of P-values</h3><p>To take into account interdependency of p-values, we used browns method to combine p-values of genes in gene sets using combine() function for individual cells. We are using pathway annotation file having 4436 gene sets for transforming data into pathway space.</p>
+								<h3 style="color:green;">Combining of P-values</h3><p>To take into account interdependency of p-values, we used browns method to combine p-values of genes in gene sets using combine() function for individual cells. We are using pathway annotation file having 4436 gene sets for transforming data into pathway space.</p>
 								<pre><code><font face="arial" color="black">##Combining of p-values for null model data matrix<br>combp_ref = combine(c5.bp.v6.0.symbols,mouse_null_data,rownames(mouse_null_data),Pval)<br>##Combining of p-values for gene expression data matrix<br>combp = combine(c5.bp.v6.0.symbols,expression_data,rownames(expression_data),Pval1)</pre></code></font>
-								<h3 style="color:blue;">Adjusting of P-values</h3>
+								<h3 style="color:green;">Adjusting of P-values</h3>
 								<p>To avoid unwanted effects of background housekeeping genes and for highlighting cell type specific gene-set activities, we adjust p-values using null model. This adjusted p-value matrix is referred to as pathway scores.</p>
-								<pre><code><font face="arial" color="black">scores = adjust(combp,combp_ref)
-</pre></code></font>			<p> This will return two matrices one with raw p-values and other one is log tranformed p-value matrix</p>
+								<pre><code><font face="arial" color="black">scores = adjust(combp,combp_ref)</pre></code></font><p> This will return three dataframes one with p-values, second one with raw p-values and third one is log transformed p-values. </p>
+						        <p>In a similar way, we can transform human gene expression into pathway scores using the human null model as shown in the example below.
+								 We have used human lung cancer expression data here which is a part of package. </p>
+								<pre><code><font face="arial" color="black">library(UniPath)<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")<br>Pval = binorm(human_null_data)<br>combp_ref <- combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval)<br>Pval1 = binorm(expression_matrix)<br>combp <- combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1)<br>scores = adjust(combp,combp_ref)</pre></code></br></font>
+
 						</div>
 <!-- Section -->
 						<div class="inner">
-								  <h3 style="color:blue;">Single cell ATAC-seq </h3>
+								  <h3 style="color:green;">Single cell ATAC-seq </h3>
 								  <p>UniPath transforms single cell open chromatin to pathway enrichment scores by highlighting cell type specific enhancers through normalization of profiles by global or local accessibility scores. </p>
-								  <h3 style="color:blue;">Global accessibility scores</h3><p>To control for sequencing depth and dropout rate, firstly we highlight cell type specific enhancer by dividing scATAC-seq profiles by their global accessibility scores. For global accessibility scores computation, bulk ATAC-seq peaks have been curated. Using this combined peak list, global accessibility scores are calculated for each genomic site based on the proportion of samples, site was detected as open chromatin peak. Global accessibility scores for test dataset is calculated using global_access() function.
-						          For this tutorial, we have used scATAC-seq keratinocytes differentiation data at three time points from GEO: GSE116248 study. We have included genomic coordinate file,raw count profiles of this data along with reference peak list and global accessibility scores. </p>
-						          <pre><code><font face="arial" color="black">globalaccess = global_access("data/GSE116248_peaks.txt","data/reference_peaks.txt","data/global_accessibility_score.csv")</pre></code></font>
+								  <h3 style="color:green;">Global accessibility scores</h3><p>To control for sequencing depth and dropout rate, firstly we highlight cell type specific enhancer by dividing scATAC-seq profiles by their global accessibility scores. For global accessibility scores computation, bulk ATAC-seq peaks have been curated. Using this combined/reference peak list, global accessibility scores are calculated for each genomic site based on the proportion of samples, the site was detected as open chromatin peak. Global accessibility scores for test dataset is calculated using global_access() function.
+						          For this tutorial, we have used human scATAC-seq keratinocytes differentiation data at three time points from GEO: GSE116248 study. Global accessibility scores for this dataset is calculated using global_access() function as shown in example below. User has to input genomic coordinate or peak file for this dataset along with the reference peaks list and human global accessibility scores.These data files are loaded from extdata folder of UniPath.
+						          <p><pre><code><font face="arial" color="black">##First set up a working directory<br>setwd(system.file("extdata", package="UniPath"))<br>globalaccess = global_access("GSE116248_peaks.txt","reference_peaks_human.txt","global_accessibility_score_human.csv")</pre></code></font>
 						          
-								  <p> Now we will perform imputation of this data since scATAC-seq data is quite sparse. Imputed data is already provided in the package. </p>
-								  <pre><code><font face="arial" color="black">imputed_count = drimpute("data/GSE116248_counts.csv")</pre></code></font>
-								  <h3 style="color:blue;">Conversion of scATAC-seq profiles into pathway enrichment scores</h3>
-					              <p>UniPath provides two methods for normalization of scATAC-seq profiles in each cell, one is global accessibility score and other is using local accessibility score. After normalizing scATAC-seq profiles, peaks having high normalized counts are considered as foreground and all peak set is used as a null or background model. Then, nearest gene within 1MBp of the peak is considered for 
-			                      conversion into pathways enrichment scores using either hypergeometric test or binomial test.</p>  
-						          <pre><code><font face="arial" color="black">data("c2.cp.v6.1.symbols")<br>scores = runGO(c2.cp.v6.1.symbols,"data/GSE116248_background","data/GSE116248_imputed_count.csv",method=1,"globalaccess","data/GSE116248_foreground",promoters = FALSE)</pre></code></font>
-				                  <p>After conversion of scRNA-seq and scATAC-seq into pathway scores, user can perform number of downstream analysis to get useful insights of biological data which are discussed in below sections.</p>						
+								  <p> User can also perform imputation of scATAC-seq data as shown below. Imputation improves the quality of data, thus it's a user choice. For this tutorial, we have used Drimpute for imputation which is time consuming task.
+								  Therefore, imputed keratinocytes data is a part of this package. Raw count file used for imputation used  below as well as other additional files can be downloaded from the link <a href=http://reggen.iiitd.edu.in:1207/unipath_data/Data/scATACseq/GSE116248/><font color="blue" face="arial">http://reggen.iiitd.edu.in:1207/unipath_data/Data/scATACseq/GSE116248/. </a></font> 
+								  <p><pre><code><font face="arial" color="black">imputed_count = drimpute("GSE116248_counts.csv")</pre></code></font>
+								  <h3 style="color:green;">Conversion of scATAC-seq profiles into pathway enrichment scores</h3>
+					              <p>UniPath provides two methods for normalization of scATAC-seq profiles in each cell, one is global accessibility score and other is using local accessibility score . After normalizing scATAC-seq profiles, peaks having high normalized counts are considered as foreground and all peak set is used as a null or background model. Then, the nearest gene within 1MBp of the peak is considered for 
+			                      conversion into pathways enrichment scores using either hypergeometric test or binomial test. User can use same background file for all scATAC-seq datasets but for foreground file user require to install perl in the system and then use
+								  nearest_gene function to create forgeground file as shown below. This function takes four arguments: First is nearest gene perl script, second is peak list then human reference genome file and last one is output file name. This is followed by system calling of perl script.
+								  <pre><code><font face="arial" color="black">cmd = nearest_gene("nearestGenes.pl","GSE116248_peaks.txt","refseq-hg19.txt","GSE116248_foreground")<br>##system call<br>system(cmd)</pre></code></font>
+								  We have also included foreground file for this dataset in the package. Then, this is followed by conversion of scATACseq profiles into pathway scores using runGO which requires pathway annotation file, backround file, imputed or raw count matrix and foreground file. Here, user can use method = 1 or 2 for highlighting enhancers using global accessibility scores and local accesibility scores respectively. See the example below.<p>
+						          <pre><code><font face="arial" color="black">data("c2.cp.v6.1.symbols")<br>scores = runGO(c2.cp.v6.1.symbols,"background_human","GSE116248_imputed_count.csv",method=1,"globalaccess","GSE116248_foreground",promoters = FALSE)</pre></code></font>
+				                  <p>Above function will return list of two dataframes containing pathway scores based on hypergeometric and binomial test respectively. After conversion of scRNA-seq and scATAC-seq into pathway scores, user can perform number of downstream analysis to get biologically useful insights  which are discussed in below sections.</p>
+								   <p>In a similar way, we can tranform mouse single cell ATAC-seq profiles using mouse global accessibility scores.</p>
 								</div>
 			
 <!-- Section -->
 						<div class="inner">
 							
-									<h3 style="color:blue;">Pseudo temporal ordering</h3><p>
-									In UniPath, for pseudo temporal ordering we first perform initial level of classification of cells using hierarchal clustering approach on pathway scores matrix. Then in order to avoid wrong ordering of cells, we compute top k nearest neighbor (KNN) index for each cell. And based on these indices and belongingness of the cells to same class as well number of times top KNN of particular class is occurring in other class, we perform two levels of distance shrinkage for every cell pair. Using this shrunk distance matrix minimum spanning tree is plotted. We have used 4 clusters for mouse lung data since there are 4 classes and default value of 5 for top KNN computation.</br>
-									<p> Example for scRNA-seq data</p>
-									<pre><code><font face="arial" color="black">##Performing hierarchal clustering on pathway score matrix<br>distclust = dist_clust(scores$adjpvalog,4)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>##Specifying number of top k nearest neighbor<br>index = index(scores$adjpvalog,5)<br>###getting cluster number for each of the KNN for individual cell<br>KNN = KNN(scores$adjpvalog,index,clusters)<br>##Two level shrinkage of distance matrix based on clusters and KNN<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>##Computation of MST on shrinked distance matrix<br>corr_mst = minimum_spanning_tree(distance)<br>##Plotting of MST<br>vertex_color = c("red","green","blue","yellow")<br>cell_labels = data.frame(c(rep("E18.5",82),rep("E14.5",44),rep("Adult",46),rep("E16.5",23)))<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function=layout.kamada.kawai,v.size = 2, e.size=0.005,mst.e.size = 0.005)<br>legend("top", legend = sort(unique(cell_labels[,1])), col = vertex_color,pch=20, box.lty=0,cex=0.6,pt.cex=1.5,horiz=T)</pre></code></font>
+									<h3 style="color:green;">Pseudo temporal ordering</h3><p>
+									In UniPath, for pseudo temporal ordering we first perform the initial level of classification of cells using hierarchal clustering approach on pathway scores matrix. Then in order to avoid wrong ordering of cells, we compute the top k nearest neighbor (KNN) index for each cell. And based on these indices and belongingness of the cells to same class as well number of times top KNN of a particular class is occurring in other class, we perform two levels of distance shrinkage for every cell pair. Using this shrunk distance matrix, minimum spanning tree is plotted. We have used 4 clusters for mouse lung data since there are 4 types of cells and k=5 for top k nearest neighbor computation.</br>
+									<p> Example of scRNA-seq data</p>
+									<pre><code><font face="arial" color="black">##Performing hierarchal clustering on pathway score matrix<br>##User has to specify number of classes<br>distclust = dist_clust(scores$adjpvalog,4)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>##Specifying number of top k nearest neighbor<br>index = index(scores$adjpvalog,5)<br></pre></code>
+									<pre><code><font face="arial" color="black">###getting cluster number for each of the KNN for individual cell<br>KNN = KNN(scores$adjpvalog,index,clusters)<br>##Two level shrinkage of distance matrix based on clusters and KNN<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>##Computation of MST on shrinked distance matrix<br>corr_mst = minimum_spanning_tree(distance)<br></pre></code></font>
+									 
+									 <p> User has to define the cell labels or groups along with the colors to be plotted on minimum spanning tree. It can be defined as shown below or user can input their cell labels. </p>
+									 
+									<pre><code><font face="arial" color="black">##Plotting of MST<br>vertex_color = c("red","green","blue","yellow")<br>cell_labels = data.frame(c(rep("E18.5",82),rep("E14.5",44),rep("Adult",46),rep("E16.5",23)))<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 2, e.size=0.005,mst.e.size = 0.005)<br>legend("top", legend = sort(unique(cell_labels[,1])), col = vertex_color,pch=20, box.lty=0,cex=0.6,pt.cex=1.5,horiz=T)</pre></code></font>
 									<a class="link"><img src="images/Pic1.jpeg" alt="" /></a>
-									<p>Considering mouse lung developmental data from Treutlein, Barbara et al., performed pseudo temporal ordering to trace developmental hierarchy of lung from epithelial cells at 4 different stages. </br>
+									<p>Considering mouse lung developmental data from Treutlein, Barbara et al., we performed pseudo temporal ordering to trace developmental hierarchy of lung from epithelial cells at 4 different stages. </br>
+
+									<p>Another example is of scRNAseq time course differentiation data of human embryonic stem cells from study Chu et al (GEO ID: GSE75748). We have included precompiled pathway scores of this study, which can be directly used for performing pseudo temporal ordering as shown in example below. </p>
+									
+									<pre><code><font face="arial" color="black">library(UniPath)<br>data("GSE75748pathwayscores")<br>distclust = dist_clust(GSE75748pathwayscores,6)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(GSE75748pathwayscores,4)<br>KNN = KNN(GSE75748pathwayscores,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)<br>vertex_color = c("yellow","Red","green","blue","black","magenta")<br>cell_labels  = data.frame(c(rep("0h",92),rep("12h",102),rep("24h",66),rep("36h",172),rep("72h",138),rep("96h",188)))<br>set.seed(100)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)</pre></code></font>
+									<a class="link"><img src="images/pic11.jpeg" alt="" /></a>
+
+							
 									<p>Example for scATAC-seq data</p>
-									<pre><code><font face="arial" color="black">adjpva = -log2(scores$hypergeometeric+.0001)<br>distclust = dist_clust(adjpva,3)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(adjpva,5)<br>KNN = KNN(adjpva,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)<br>vertex_color = c("red","green","blue")<br>cell_labels = data.frame(c(rep("0days",96),rep("3days",95),rep("6days",97)))<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function=layout.kamada.kawai,v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)</pre></code></font>
+									<pre><code><font face="arial" color="black">adjpva = -log2(scores$hypergeometeric+.0001)<br>distclust = dist_clust(adjpva,3)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(adjpva,5)<br>KNN = KNN(adjpva,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)<br>vertex_color = c("red","green","blue")<br>cell_labels = data.frame(c(rep("0days",96),rep("3days",95),rep("6days",97)))<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)</pre></code></font>
 									<a class="link"><img src="images/pic2.jpeg" alt="" /></a>
 									<p>Above figure shows keratinocytes differentiation at 3 different time points.</p>
 									</div>
@@ -125,49 +162,53 @@
 <!-- Section -->
 						<div class="inner">
 									
-									<h3 style="color:blue;">Other beneficial features of using UniPath</h3>
-									<h3 style="color:blue;">Clustering and annotation of cells</h3>
-									<p>Clustering and classification of cell types is a common task in analyzing single cell data. It helps in annotation of new and rare cell type classes. Mostly this is done in gene expression space but UniPath introduced an approach to perform these tasks using pathway scores. Pathway scores helped us in cell annotation of unknown cell types along with detection rare cell classes. UniPath can also help in cell detection based on cell specific gene marker sets.</p>
+									<h3 style="color:green;">Other beneficial features of using UniPath</h3>
+									<h3 style="color:green;">Clustering and cell detection</h3>
+									<p>Clustering and classification of cell types is a common task in analyzing single cell data. It helps in the annotation of new and rare cell type classes. Mostly this is done in gene expression space but UniPath introduced an approach to perform these tasks using pathway scores. Pathway scores helped us in cell annotation of unknown cell types along with detection of rare cell classes. </p>
 									<figure class="half" style="display:flex">
 									<a class="link"><img style="width:650px" src="images/pic5.jpg"></a>
 									<a class="link"><img style="width:750px" src="images/pic3.jpeg"  ></a>
 									</figure>
-									<p>Above plots shows separation of three classes in pathway space. </p>
-									<h3 style="color:blue;">Differential pathway analysis </h3>
-                                    <p>Generally differential gene expression analysis is performed to distinguish between different cell populations but UniPath can help in finding differentially expressed pathways among different group of cells. It uses Wilcoxon rank sum test for allowing users to access statistically significant pathways among group of cells. Here, data corresponds to pathway score matrix and define a group of two or more cell types among which differential pathway analysis needs to be performed. </p>
-                                    <pre><code>wilx = temporaldif(data, group)</pre></code>
-									<a class="link"><img src="images/pic6.jpeg"></a>
-                                    <p>In above volcano plots built using EnhancedVolcano library in R, we have shown differential pathways in adult lung stage vs rest of the stages or cells using temporaldif() based on median fold change.</p>
-									<h3 style="color:blue;">Differential co-enrichment pathway analysis </h3>
-									<p>Two cell populations can have differences in multiple ways. UniPath introduced the notion of differential co-enrichment pathway analysis for
-comparing two cell population. It is meant to studying mechanisms involved in controlling different properties of cells. For this purpose it has a function difcoccur() can be used where user can input pathway scores (raw p-values) and group.</p>		
-									<pre><code>library(UniPath)<br>##Differential coenrichment in NSCLC  TS cells<br>##load lung cancer pathway scores data<br>data("lungCancer_pathway_scores")<br>data =  1-pathwayscores<br>##Define NSCLC  TS cells in group 1<br>group = as.matrix(c(rep(1,80),rep(2,82)))<br>##Perform differential coenrichment<br>diff1 = difcoccur(data,group)<br>##Two matrices will be generated<br>pval_TS = diff1$pval<br>diff_TS = diff1$dif</pre></code>
-									<p>Similarly, we can find differentially coenriched pathways in Adherent NSCLC cells with respect to Adherent NSCLC cells. </p>
-									<pre><code>##Differential coenrichment in Adherent(Adh) NSCLC cells<br>data("lungCancer_pathway_scores")<br>data =  1-pathwayscores<br>##Define Adherent NSCLC cells in group 1<br>group = as.matrix(c(rep(2,80),rep(1,82)))<br>diff2 = difcoccur(data,group)<br>pval_Adh = diff2$pval<br>diff_Adh = diff2$dif</br></code></pre>
-									<p>For visualization extract relevant coenriched pathway terms as shown in example below. </p>
-									<pre><code>##Preprocessing of data in required for dotplot based visualization<br>##Based on the p-value and difference, we will visualize differential coenrichment using dotplot created using ggplot2<br>##Extract relevant coenriched pathway terms for TS cell group from both pvalue and difference files<br>pval_TSpathways = melt(pval_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>pval_TSpathways = cbind.data.frame(paste(pval_TSpathways[,1],pval_TSpathways[,2],sep="-"),pval_TSpathways[,3])<br>diff_TSpathways = melt(diff_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>diff_TSpathways = cbind.data.frame(paste(diff_TSpathways[,1],diff_TSpathways[,2],sep="-"),diff_TSpathways[,3])<br>##Defining group label<br>TS_group = c(rep("TS",6))
+								    <p>Above plots shows the separation of three classes in pathway space. </p>
+
+									<p>UniPath can also help in cell detection based on cell specific gene marker sets which are available in this package. Considering data from study id GSE81861, we have computed gene set enrichment scores using cell type specific marker file as shown in example below.
+									<br><pre><code><font face="arial" color="black">library(UniPath)<br>data("human_null_model")<br>data("GSE81861")<br>data("human_markers")<br>Pval = binorm(human_null_data)<br>combp_ref = combine(human_markers,human_null_data,rownames(human_null_data),Pval)<br>Pval1 = binorm(data)<br>combp = combine(human_markers,data,rownames(data),Pval1)<br>scores = adjust(combp,combp_ref)</pre></code></font>
+                                    <p> In case of scATAC-seq profiles cell detection, human_markers_scATACseq.RData marker file can be used. </p>
+									<h3 style="color:green;">Differential pathway analysis </h3>
+                                    <p>Generally, differential gene expression analysis is performed to distinguish between different cell populations but UniPath can help in finding differentially expressed pathways among different group of cells. It uses Wilcoxon rank sum test for allowing users to access statistically significant pathways among the group of cells. Here, we are using raw pathway scores of same mouse lung data transformed above for getting differential pathways between adult lung stage and rest of the cells in the example below.
+                                    <pre><code><font face="arial" color="black">##Use raw p-value data<br>data = scores$adjpvaraw<br>##define groups<br>group = as.matrix(c(rep(2,81),rep(2,44),rep(1,46),rep(2,23)))<br>wilx = temporaldif(data,group)<br></pre></code></font>
+									<p>This will return a list of 3 containing statistical significance(p-values) for enrichment, Fold change based on mean and Fold change based on median for the defined groups. In UniPath for downstream analysis, median fold change is considered.</p>
+									<h3 style="color:green;">Differential cooccurrence pathway analysis </h3>
+									<p>Two cell populations can have differences in multiple ways. UniPath introduced the notion of differential cooccurrence pathway analysis for
+										comparing two cell population. It is meant to studying mechanisms involved in controlling different properties of cells. For this purpose it has a function difcoccur() can be used where user can input pathway scores (raw p-values) and group.</p>	
+										<p>For this tutorial, we have included raw pathway scores for lung cancer data which contains 162 cells. We are finding differentially cooccuring pathways in NSCLC TS cells with respect to Adherent NSCLC cells (81 to 162 cells). </p>
+									<pre><code><font face="arial" color="black">library(UniPath)<br>##Differential cooccurence in NSCLC  TS cells<br>##load lung cancer pathway scores data<br>data("lungCancer_pathway_scores")<br>##Define NSCLC  TS cells in group 1<br>group = as.matrix(c(rep(1,80),rep(2,82)))<br>##Perform differential cooccurence<br>diff1 = difcoccur(pathwayscores,group)<br>##Two matrices will be generated<br>pval_TS = diff1$pval<br>diff_TS = diff1$dif</pre></code></font>
+									<p>Similarly, we can find differentially cooccuring pathways in Adherent NSCLC cells with respect to Adherent NSCLC cells. </p>
+									<pre><code><font face="arial" color="black">##Differential cooccurence in Adherent(Adh) NSCLC cells<br>data("lungCancer_pathway_scores")<br>##Define Adherent NSCLC cells in group 1<br>group = as.matrix(c(rep(2,80),rep(1,82)))<br>diff2 = difcoccur(pathwayscores,group)<br>pval_Adh = diff2$pval<br>diff_Adh = diff2$dif</br></code></pre></font>
+									<p>For visualization extract relevant cooccuring pathway terms as shown in example below. </p>
+									<pre><code><font face="arial" color="black">##Preprocessing of data in required for dotplot based visualization<br>##Based on the p-value and difference, we will visualize differential cooccurence using dotplot created using ggplot2<br>##Extract relevant cooccured pathway terms for TS cell group from both pvalue and difference files<br>pval_TSpathways = reshape2::melt(pval_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>pval_TSpathways = cbind.data.frame(paste(pval_TSpathways[,1],pval_TSpathways[,2],sep="-"),pval_TSpathways[,3])<br>diff_TSpathways = reshape2::melt(diff_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>diff_TSpathways = cbind.data.frame(paste(diff_TSpathways[,1],diff_TSpathways[,2],sep="-"),diff_TSpathways[,3])<br>##Defining group label<br>TS_group = c(rep("TS",6))
 									<br>##Combine p-value,difference and group for relevant pathways in TS cells<br>TS = cbind.data.frame(pval_TSpathways,diff_TSpathways[,2],TS_group)<br>colnames(TS) = c("Pathways","Pvalue","diff","group")
-									<br>##Same preprocessing in case of Adh cells as TS cells<br>##Extracting same pathways from ADh group from comparison with TS cells<br>pval_Adhpathways = melt(pval_Adh[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>pval_Adhpathways = cbind.data.frame(paste(pval_Adhpathways[,1],pval_Adhpathways[,2],sep="-"),pval_Adhpathways[,3])<br>diff_Adhpathways = melt(diff_Adh[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>diff_Adhpathways = cbind.data.frame(paste(diff_Adhpathways[,1],diff_Adhpathways[,2],sep="-"),diff_Adhpathways[,3])<br>Adh_group = c(rep("Adh",6))<br>Adh = cbind.data.frame(pval_Adhpathways,diff_Adhpathways[,2],Adh_group)<br>colnames(Adh) = c("Pathways","Pvalue","diff","group")
+									<br>##Same preprocessing in case of Adh cells as TS cells<br>##Extracting same pathways from ADh group from comparison with TS cells<br>pval_Adhpathways = reshape2::melt(pval_Adh[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>pval_Adhpathways = cbind.data.frame(paste(pval_Adhpathways[,1],pval_Adhpathways[,2],sep="-"),pval_Adhpathways[,3])<br>diff_Adhpathways = reshape2::melt(diff_Adh[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>diff_Adhpathways = cbind.data.frame(paste(diff_Adhpathways[,1],diff_Adhpathways[,2],sep="-"),diff_Adhpathways[,3])<br>Adh_group = c(rep("Adh",6))<br>Adh = cbind.data.frame(pval_Adhpathways,diff_Adhpathways[,2],Adh_group)<br>colnames(Adh) = c("Pathways","Pvalue","diff","group")
 									<br>##Combine TS and Adh cell data<br>final = rbind(TS,Adh)
-									<br>##Using ggplot2 we will plot a dotplot showing differentially coenriched pathways in TS and Adh cells<br>library(ggplot2)<br>p = ggplot() + geom_point(data=final, aes(x=group, y=Pathways, color=diff,size=Pvalue)) +<br>scale_color_gradient(low="red", high="blue") + scale_fill_gradient(low="grey", high="blue") + scale_size(trans = 'reverse') + theme_light()</pre></code>
+									<br>##Using ggplot2 we will plot a dotplot showing differentially cooccured pathways in TS and Adh cells<br>library(ggplot2)<br>p = ggplot() + geom_point(data=final, aes(x=group, y=Pathways, color=diff,size=Pvalue)) +<br>scale_color_gradient(low="red", high="blue") + scale_fill_gradient(low="grey", high="green") + scale_size(trans = 'reverse') + theme_light()</pre></code></font>
 									<a class="link"><img src="images/pic7.jpeg"></a>
-									<p>Above dot plot shows coenrichment of different pathway pairs in different cell types.</p>
+									<p>Above dot plot shows cooccurence of different pathway pairs in different cell types.</p>
 
 
 									
-									<h3 style="color:blue;">Continuum score for pathways on minimum spanning tree</h3>
-									<p>UniPath also helps in visualization of gradient of pathways on minimum spanning tree, thus showing lineage potency as well other properties such as tumorigenicity etc. We have included lung cancer data for the tutorial. In the example given below we are converting lung cancer gene expression data into pathway scores and plotting minimum spanning tree. Using this minimum spanning tree we are showing gradient of GO_REGULATION_OF_ICOSANOID_SECRETION pathway. </p>
+									<h3 style="color:green;">Continuum score for pathways on minimum spanning tree</h3>
+									<p>UniPath also helps in visualization of gradient of pathways on minimum spanning tree, thus showing lineage potency as well other properties such as tumorigenicity etc. We have included lung cancer data for the tutorial. In the example given below, we are converting lung cancer gene expression data into pathway scores and plotting minimum spanning tree. Using this minimum spanning tree we are showing gradient of GO_REGULATION_OF_ICOSANOID_SECRETION pathway. </p>
 									<pre><code><font face="arial" color="black">library(UniPath)
 									<br>##Load Lung cancer data<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")
-                                    <br>Pval = binorm(human_null_matrix)<br>combp_ref = combine(c5.bp.v6.0.symbols,human_null_matrix,rownames(human_null_matrix),Pval)<br>Pval1 = binorm(expression_matrix)<br>combp = combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1)<br>scores = adjust(combp,combp_ref)
+                                    <br>Pval = binorm(human_null_data)<br>combp_ref = combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval)<br>Pval1 = binorm(expression_matrix)<br>combp = combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1)<br>scores = adjust(combp,combp_ref)
 									<br>distclust = dist_clust(scores$adjpvalog,2)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(scores$adjpvalog,5)<br>KNN = KNN(scores$adjpvalog,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)
-									<br>vertex_color  = c( 'green' , 'red')<br>cell_labels = data.frame(c(rep("NSCLC TS cells",80),rep("Adherent NSCLC cells",82)))<br>set.seed(50)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function=layout.kamada.kawai,v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)
-									<br>##Showing gradient of a pathway on mst<br>set.seed(50)<br>coltri = gradient(scores$adjpva, "GO_REGULATION_OF_ICOSANOID_SECRETION")<br>UniPath::mst.plot.mod(corr_mst, vertex.color = coltri,mst.edge.col="black",bg="white",layut.function=layout.kamada.kawai,v.size = 3,e.size=0.005,mst.e.size = 0.005)</br></pre></code></font>
+									<br>vertex_color  = c( 'green' , 'red')<br>cell_labels = data.frame(c(rep("NSCLC TS cells",80),rep("Adherent NSCLC cells",82)))<br>set.seed(50)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)
+									<br>##Showing gradient of a pathway on mst<br>set.seed(50)<br>coltri = gradient(scores$adjpva, "GO_REGULATION_OF_ICOSANOID_SECRETION")<br>UniPath::mst.plot.mod(corr_mst, vertex.color = coltri,mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 4,e.size=0.005,mst.e.size = 0.005)</br></pre></code></font>
 									<figure class="half" style="display:flex">
 									<a class="link"><img src="images/pic9.jpg"></a>
 									<a class="link"><img  src="images/pic10.jpg"></a>
 									</figure>
-									<p>Above figure shows increase in gradient of a pathway in NSCLC TS cells</p>
+									<p>Above figure shows an increase in the gradient of a pathway in NSCLC TS cells</p>
 
 </div>
 </section>			

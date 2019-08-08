@@ -1,6 +1,7 @@
+
 <html>
 	<head>
-		<title>Urban by TEMPLATED</title>
+		<title>UniPath</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -16,7 +17,7 @@
 		<ul>
 		
 		   <a href="index.html" class ="btn">Home</a>
-		   <a href='active'><span>Download </span></a>
+		   <a href="download.html"><span>Download </span></a>
 		   <a href="FAQs.html" class="btn">FAQs</a>
 		   <a href="contact.html"><span>Contact</span></a>
 
@@ -56,19 +57,30 @@
 						<div class="inner">
 							<!-- 2 Columns -->
 									<div class="col col1">
-									  <h3 style="color:blue;">FAQs </h3>
-									  <p>1.	Can I use raw read count data?</p>
-									  <p>Ans. No, UniPath works with FPKM/TPM/RPKM data</p>
-									  <p>2.	Should I use raw p-values or log transformed p-values?</p>
-
-									  <p>3.	What is the file format used for input gene expression matrix?</p>
-									  <p>Ans. .csv format with genes in rows and samples/cells in columns</p>
-									  <p>4.	What is the input file format used for peak list?</p>
-									  <p>Ans. Tab separated file without header
-									  <p>5. How does differential pathways co-enrichment analysis help?</p>
-									  <p>Ans. Differential co-enrichment pathway analysis is useful in studying regulatory mechansims involved in controlling behaviour of cancer cell properties. </p>
-                                      <p>6.  Should imputed or non imputed data to be used for scATAC-seq?								
+									  <h3 style="color:green;">FAQs </h3>
+									  <p>1.	Can I use raw read count data?<br>
+									   Ans. No, UniPath works only with FPKM/TPM/RPKM gene expression data. </p>
+									  <p>2. How to process big data?<br>
+									   Ans. User can split dataset column-wise and use chunks of data as input for UniPath. After parallel processing user can combine entire if required for downstream analysis.
+									  <p>3.	Should I use raw p-values or log transformed p-values?
+									  <br>Ans. It depends on users chocice whether to consider raw p-values or log transformed p-values for downstream analysis. But for differential coenrichment and differential analysis, one should use raw p-value matrix since data is undergoing log transformation automaically.
+									  <p>4.	What is the file format used for input single cell gene expression matrix?
+									  <br>Ans. For tutorial purpose in-built data is provided in data folder of UniPath in .RData format but user can read files having genes in the rows and samples/cells in columns. File format could be .txt or .csv.</p>
+									  <p>5.	What is the input file format of genomic coordinates or peak list for computing nearest genes for scATAC-seq genomic sites?
+									  <br>Ans. For computing the nearest gene to every genomic site of scATAC-seq profile, tab separated peak list is used as an input without a header.
+									  <p>6. What is the file format used for single cell ATAC-seq expression profiles?
+									  <br>Ans. .csv file format should be used where genomic coordinates are in the first three columns and samples/cells should be in the columns. But, for conversion of scATAC-Seq profiles to pathways only read count data should be input, not genomic coordinates.
+							          <p>7. How does differential pathways co-enrichment analysis help?
+									  <br>Ans. Differential coenrichment pathway analysis is useful in studying regulatory mechanisms involved in controlling behaviour of cells. Therefore, helps user in studying differences in two cell populations.
+                                      <p>8. Should imputed or non imputed data to be used for scATAC-seq?
+									  <br>Ans. It depends on users choice but imputation of scATAC-seq data can improve the quality of scATAC-seq data. McImpute, scImpute, DrImpute in R can be used for imputation purpose. 
+									  In UniPath, we have used DrImpute for imputation, but it is a third party software and addition facility in UniPath package. Imputation using DrImpute is a time consuming task and its not a responsibility of UniPath. </p>
+                                      <p>9. What if pseudo temporally ordered tree is showing randomization when plotted multiple times?
+									 <br> Ans. To obtain same psuedo temporally ordered tree i.e. same placement of cells every time, user has to use set.seed. </p>
+									 <p>10.  How to decide upon the number of clusters/classes and K nearest neighbour for pseudo temporal ordering?
+									 <br>Ans. Number of classes is defined based on types of cells in the data. And for K nearest neighbor, default setting is 5 but user can change accordingly.
+									  <br>								  
 									</div>
 								</div>
 
-						<
+						
