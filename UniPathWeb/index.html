@@ -19,7 +19,7 @@
 		<ul>
 		
 		   <a href="index.html" class ="btn">Home</a>
-		   <a href="download.html"><span>Download </span></a>
+		   <a href="Download.html"><span>Download </span></a>
 		   <a href="FAQs.html" class="btn">FAQs</a>
 		   <a href="contact.html"><span>Contact</span></a>
 
@@ -46,7 +46,7 @@
 					<header>
 						<h2 class="project-name"><font color="white" face = "arial"><center>UniPath</h2></font><center>
 						<h3><font color="white" face="arial"><center>Overview</h3></font><center>
-						<p><font size= "4" face="arial"> UniPath provides robust statistical methods to represent every single cell using pathway and gene-set enrichment scores. It can be used with both single cell RNA-seq and single cell ATAC-seq profile with scalability for atlas scale data-sets. Unipath comes with several features like psuedo-temporal ordering using pathway scores and unconventional way of enumerating differences between two cell populations.</font></p>
+						<p><font size= "4" face="arial"> UniPath provides robust statistical methods to represent every single cell using pathway and gene-set enrichment scores. It can be used with both single cell RNA-seq and single cell ATAC-seq profile with scalability for atlas scale data-sets. UniPath comes with several features like pseudo-temporal ordering using pathway scores and unconventional way of enumerating differences between two cell populations.</font></p>
 					</header>
 				</div>
 			</section>
@@ -105,7 +105,7 @@
 								<pre><code><font face="arial" color="black">##Combining of p-values for null model data matrix<br>combp_ref = combine(c5.bp.v6.0.symbols,mouse_null_data,rownames(mouse_null_data),Pval)<br>##Combining of p-values for gene expression data matrix<br>combp = combine(c5.bp.v6.0.symbols,expression_data,rownames(expression_data),Pval1)</pre></code></font>
 								<h3 style="color:green;">Adjusting of P-values</h3>
 								<p>To avoid unwanted effects of background housekeeping genes and for highlighting cell type specific gene-set activities, we adjust p-values using null model. This adjusted p-value matrix is referred to as pathway scores.</p>
-								<pre><code><font face="arial" color="black">scores = adjust(combp,combp_ref)</pre></code></font><p> This will return three dataframes one with p-values, second one with raw p-values and third one is log transformed p-values. </p>
+								<pre><code><font face="arial" color="black">scores = adjust(combp,combp_ref)</pre></code></font><p> This will return a list of three matrices one with adjusted p-values, second one with adjusted raw p-values and third one is log transformed adjusted p-values. </p>
 						        <p>In a similar way, we can transform human gene expression into pathway scores using the human null model as shown in the example below.
 								 We have used human lung cancer expression data here which is a part of package. </p>
 								<pre><code><font face="arial" color="black">library(UniPath)<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")<br>Pval = binorm(human_null_data)<br>combp_ref <- combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval)<br>Pval1 = binorm(expression_matrix)<br>combp <- combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1)<br>scores = adjust(combp,combp_ref)</pre></code></br></font>
@@ -137,7 +137,7 @@
 						<div class="inner">
 							
 									<h3 style="color:green;">Pseudo temporal ordering</h3><p>
-									In UniPath, for pseudo temporal ordering we first perform the initial level of classification of cells using hierarchal clustering approach on pathway scores matrix. Then in order to avoid wrong ordering of cells, we compute the top k nearest neighbor (KNN) index for each cell. And based on these indices and belongingness of the cells to same class as well number of times top KNN of a particular class is occurring in other class, we perform two levels of distance shrinkage for every cell pair. Using this shrunk distance matrix, minimum spanning tree is plotted. We have used 4 clusters for mouse lung data since there are 4 types of cells and k=5 for top k nearest neighbor computation.</br>
+									In UniPath, for pseudo temporal ordering we first perform the initial level of classification of cells using hierarchical clustering approach on pathway scores matrix. Then in order to avoid wrong ordering of cells, we compute the top k nearest neighbor (KNN) index for each cell. And based on these indices and belongingness of the cells to same class as well number of times top KNN of a particular class is occurring in other class, we perform two levels of distance shrinkage for every cell pair. Using this shrunk distance matrix, minimum spanning tree is plotted. We have used 4 clusters for mouse lung data since there are 4 types of cells and k=5 for top k nearest neighbor computation.</br>
 									<p> Example of scRNA-seq data</p>
 									<pre><code><font face="arial" color="black">##Performing hierarchal clustering on pathway score matrix<br>##User has to specify number of classes<br>distclust = dist_clust(scores$adjpvalog,4)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>##Specifying number of top k nearest neighbor<br>index = index(scores$adjpvalog,5)<br></pre></code>
 									<pre><code><font face="arial" color="black">###getting cluster number for each of the KNN for individual cell<br>KNN = KNN(scores$adjpvalog,index,clusters)<br>##Two level shrinkage of distance matrix based on clusters and KNN<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>##Computation of MST on shrinked distance matrix<br>corr_mst = minimum_spanning_tree(distance)<br></pre></code></font>
@@ -182,10 +182,10 @@
 									<p>This will return a list of 3 containing statistical significance(p-values) for enrichment, Fold change based on mean and Fold change based on median for the defined groups. In UniPath for downstream analysis, median fold change is considered.</p>
 									<h3 style="color:green;">Differential cooccurrence pathway analysis </h3>
 									<p>Two cell populations can have differences in multiple ways. UniPath introduced the notion of differential cooccurrence pathway analysis for
-										comparing two cell population. It is meant to studying mechanisms involved in controlling different properties of cells. For this purpose it has a function difcoccur() can be used where user can input pathway scores (raw p-values) and group.</p>	
+										comparing two cell population. It is meant for studying mechanisms involved in controlling different properties of cells. For this purpose it has a function difcoccur() can be used where user can input pathway scores (raw p-values) and group.</p>	
 										<p>For this tutorial, we have included raw pathway scores for lung cancer data which contains 162 cells. We are finding differentially cooccuring pathways in NSCLC TS cells with respect to Adherent NSCLC cells (81 to 162 cells). </p>
 									<pre><code><font face="arial" color="black">library(UniPath)<br>##Differential cooccurence in NSCLC  TS cells<br>##load lung cancer pathway scores data<br>data("lungCancer_pathway_scores")<br>##Define NSCLC  TS cells in group 1<br>group = as.matrix(c(rep(1,80),rep(2,82)))<br>##Perform differential cooccurence<br>diff1 = difcoccur(pathwayscores,group)<br>##Two matrices will be generated<br>pval_TS = diff1$pval<br>diff_TS = diff1$dif</pre></code></font>
-									<p>Similarly, we can find differentially cooccuring pathways in Adherent NSCLC cells with respect to Adherent NSCLC cells. </p>
+									<p>Similarly, we can find differentially cooccuring pathways in Adherent NSCLC cells with respect to TS NSCLC cells. </p>
 									<pre><code><font face="arial" color="black">##Differential cooccurence in Adherent(Adh) NSCLC cells<br>data("lungCancer_pathway_scores")<br>##Define Adherent NSCLC cells in group 1<br>group = as.matrix(c(rep(2,80),rep(1,82)))<br>diff2 = difcoccur(pathwayscores,group)<br>pval_Adh = diff2$pval<br>diff_Adh = diff2$dif</br></code></pre></font>
 									<p>For visualization extract relevant cooccuring pathway terms as shown in example below. </p>
 									<pre><code><font face="arial" color="black">##Preprocessing of data in required for dotplot based visualization<br>##Based on the p-value and difference, we will visualize differential cooccurence using dotplot created using ggplot2<br>##Extract relevant cooccured pathway terms for TS cell group from both pvalue and difference files<br>pval_TSpathways = reshape2::melt(pval_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>pval_TSpathways = cbind.data.frame(paste(pval_TSpathways[,1],pval_TSpathways[,2],sep="-"),pval_TSpathways[,3])<br>diff_TSpathways = reshape2::melt(diff_TS[c("ST_WNT_BETA_CATENIN_PATHWAY","BIOCARTA_SHH_PATHWAY","KEGG_GLYCOLYSIS_GLUCONEOGENESIS"),c("KEGG_TGF_BETA_SIGNALING_PATHWAY","KEGG_NOTCH_SIGNALING_PATHWAY")])<br>diff_TSpathways = cbind.data.frame(paste(diff_TSpathways[,1],diff_TSpathways[,2],sep="-"),diff_TSpathways[,3])<br>##Defining group label<br>TS_group = c(rep("TS",6))
@@ -199,7 +199,7 @@
 
 									
 									<h3 style="color:green;">Continuum score for pathways on minimum spanning tree</h3>
-									<p>UniPath also helps in visualization of gradient of pathways on minimum spanning tree, thus showing lineage potency as well other properties such as tumorigenicity etc. We have included lung cancer data for the tutorial. In the example given below, we are converting lung cancer gene expression data into pathway scores and plotting minimum spanning tree. Using this minimum spanning tree we are showing gradient of GO_REGULATION_OF_ICOSANOID_SECRETION pathway. </p>
+									<p>UniPath also helps in visualization of gradient of pathways on minimum spanning tree, thus showing lineage potency as well other properties such as tumorigenicity etc. We have included lung cancer data for the tutorial. In the example given below, we are converting lung cancer gene expression data into pathway scores and plotting minimum spanning tree. Using this minimum spanning tree we are showing gradient of GO_REGULATION_OF_ICOSANOID_SECRETION pathway using its ajusted p-value. </p>
 									<pre><code><font face="arial" color="black">library(UniPath)
 									<br>##Load Lung cancer data<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")
                                     <br>Pval = binorm(human_null_data)<br>combp_ref = combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval)<br>Pval1 = binorm(expression_matrix)<br>combp = combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1)<br>scores = adjust(combp,combp_ref)
