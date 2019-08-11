@@ -39,16 +39,6 @@ mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
 mso-ansi-language:EN'> Jump to <a href="./documentation.htm#matlab"> Matlab_code_help <o:p></o:p> </a> <a href="./documentation.htm#python">Python_code_help</a> <a href="FAQ.htm"> FAQ </a>  <o:p></o:p></span></b></p>
 
 
-<p class=MsoNormal style='margin-left:72.0pt'><span lang=EN style='font-size:
-14.0pt;line-height:115%;mso-fareast-font-family:"Times New Roman";mso-fareast-theme-font:
-minor-fareast'><span
-style='mso-spacerun:yes'>                                                
-</span>Jump to<span style='mso-spacerun:yes'>    </span><span class=SpellE>Python_Version</span><span
-style='mso-spacerun:yes'>    </span><span class=SpellE>Matlab_code_version</span><span
-style='mso-spacerun:yes'>      </span><o:p></o:p></span></p>
-
-
-
 <p class=MsoNormal style='margin-left:72.0pt'><b><span lang=EN><o:p>&nbsp;</o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><b><span lang=EN><o:p>&nbsp;</o:p></span></b></p>
@@ -212,8 +202,8 @@ style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><b><span lang=EN
-style='font-size:14.0pt;line-height:115%'>Using <span class=SpellE>Matlab</span>
-source code <o:p></o:p></span></b></p>
+style='font-size:14.0pt;line-height:115%'>Using <span class=SpellE> <a id="matlab"> Matlab
+source code </a><o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
@@ -418,8 +408,8 @@ style='font-size:16.0pt;line-height:115%'> code <o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>&quot;# FITS Python
-version&quot; </span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><a id="python"><span lang=EN>&quot;# FITS Python
+version&quot; </a></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
@@ -436,13 +426,13 @@ class=SpellE>reprent</span> samples/cells in csv file.</span></span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><a name="_Hlk14770115"><span
-lang=EN>$</span></a><span lang=EN> python3 main_FITS1.py -<span class=SpellE>i</span>
+lang=EN>$</span></a><span lang=EN> python3 FITSPhase1.py -<span class=SpellE>i</span>
 &lt;csv file name&gt;</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>e.g.</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$python3
-main_FITS1.py -<span class=SpellE>i</span> sce5_raw.csv</span></p>
+FITSPhase1.py -<span class=SpellE>i</span> sce5_raw.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>'sce5_raw.csv'
 consist of <span class=SpellE>epignome</span> data corresponding to five cell
@@ -452,7 +442,7 @@ type.</span></p>
 input parameter you can pass in phase1 </span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$ python3
-main_FITS1.py -<span class=SpellE>i</span> &lt;csv file name&gt; -o &lt;name to
+FITSPhase1.py -<span class=SpellE>i</span> &lt;csv file name&gt; -o &lt;name to
 save imputed file&gt; -l &lt;Depth <span class=SpellE>upto</span> which tree
 will grow&gt;</span></p>
 
@@ -460,7 +450,7 @@ will grow&gt;</span></p>
 availed by following command</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$ python3
-main_FITS1.py -h</span></p>
+FITSPhase1.py -h</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
@@ -474,7 +464,7 @@ FITSPhase1 <span class=SpellE>parallely</span> in background <span class=GramE>u
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$ <span
-class=SpellE>nohup</span> python3 main_FITS1.py -<span class=SpellE>i</span>
+class=SpellE>nohup</span> python3 FITSPhase1.py -<span class=SpellE>i</span>
 &lt;csv file name&gt; &gt; &lt;name&gt;.txt &amp;</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
@@ -485,12 +475,12 @@ Each run will generate imputed matrix. Once Phase1 is over then run Phase2 to
 generate final imputed matrix based on matrix received as output from Phase1.</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$python3
-main_FITS2.py -<span class=SpellE>i</span> &lt;csv file name&gt;</span></p>
+FITSPhase2.py -<span class=SpellE>i</span> &lt;csv file name&gt;</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>e.g.</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$python3
-main_FITS2.py -<span class=SpellE>i</span> sce5_raw.csv</span></p>
+FITSPhase2.py -<span class=SpellE>i</span> sce5_raw.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>You have to pass
 same input file as you passed in Phase1. Don't worry Phase2 takes only one
@@ -504,7 +494,7 @@ input parameter you can pass in phase2 </span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$python<span
-class=GramE>3<span style='mso-spacerun:yes'>  </span>main_FITS2.py</span> -<span
+class=GramE>3<span style='mso-spacerun:yes'>  </span>FITSPhase2.py</span> -<span
 class=SpellE>i</span> &lt;csv file name&gt; -o &lt;output&gt; -t &lt;<span
 class=SpellE>topk</span> &gt; -c &lt;1/0 takes values either 1 or 0&gt; </span></p>
 
@@ -523,7 +513,7 @@ features/sites wise.</span></p>
 availed by following command</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN>$ python3
-main_FITS2.py -h</span></p>
+FITSPhase2.py -h</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
@@ -545,7 +535,7 @@ many times before <span class=GramE>calling<span style='mso-spacerun:yes'> 
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><span
 style='mso-spacerun:yes'> </span><span style='mso-tab-count:2'>                       </span>$
-<span class=SpellE>nohup</span> python3 main_FITS1.py -<span class=SpellE>i</span>
+<span class=SpellE>nohup</span> python3 FITSPhase1.py -<span class=SpellE>i</span>
 &lt;csv file name&gt; &gt; &lt;name&gt;.txt &amp;</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
@@ -554,9 +544,9 @@ style='mso-spacerun:yes'> </span><span style='mso-tab-count:2'>                 
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:36.0pt;text-indent:36.0pt'><span lang=EN>$FITSPhase2<span
-class=GramE>L<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:36.0pt'><span lang=EN>$python3 FITSPhase2L.py<span
+class=GramE>L<span style='mso-spacerun:yes'>  </span>input</span> -i unimputed.csv<span
+style='mso-spacerun:yes'>   </span> -o imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span lang=EN><o:p>&nbsp;</o:p></span></p>
 
