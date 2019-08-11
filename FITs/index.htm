@@ -5,74 +5,100 @@ xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
 xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
-<style>
-h1 {
-  background-color: black;
-}
 
-div {
-  background-color: white;
-margin-left : 40Px ;
-margin-right : 40Px ;
-
-}
-
-p {
-  background-color: white;
-margin-left : 40Px ;
-margin-right : 40Px ;
-
-}
-</style>
 </head>
 
 <body lang=EN-IN link=blue vlink=purple style='tab-interval:36.0pt'>
-<h1 background-color: green;>
- <img src="FITs.jpg" alt="Logo"  height="250"  width="1000" >
-</h1>
+
 <div class=WordSection1>
 
-<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p></span></p>
+<h1 style='margin-right:4.0cm'><span style='mso-fareast-font-family:"Times New Roman";
+color:white;mso-color-alt:windowtext;mso-no-proof:yes'><img width=1200
+height=250 id="_x0000_i1025" src=FITs.jpg alt=Logo></span><span
+style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></h1>
 
-<p class=MsoNormal><span lang=EN>Forest of Imputation Trees (FITs) is a method
-to impute highly sparse and noisy data-sets from single cell epigenome
-profiling. It has been tested on single cell open-chromatin profiles as well as
-single RNA-seq profile. </span></p>
+<div>
 
-<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p></span></p>
-
-
-<p class=MsoNormal><span lang=EN> <a href=> Standalone executable code for Linux </a></span></p>
-
-<p class=MsoNormal><span lang=EN>Python code</span></p>
-
-<p class=MsoNormal><span class=SpellE><span lang=EN>Matlab</span></span><span
-lang=EN> code</span></p>
-
-<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p></span></p>
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:4.0cm;
+mso-margin-bottom-alt:auto'><span lang=EN style='mso-ansi-language:EN'><span
+style='mso-tab-count:2'>                        </span></span><span lang=EN
+style='font-size:18.0pt;font-family:"Arial",sans-serif;mso-ansi-language:EN'><a
+href="documentation.htm">Documentation</a><span style='mso-spacerun:yes'>     
+</span> <a href="FAQ.htm"> FAQ </a><span style='mso-spacerun:yes'>        </span><span
+style='mso-spacerun:yes'> </span> <a href="contact.htm"> contact<o:p></o:p> </a></span></p>
 
 
-<p class=MsoNormal><span lang=EN>FITs work in two phases. It has been made so
-to handle very large read-count matrixes and to get better imputation. In
-phase-1 it builds multiple imputation trees and from every tree it <span
-class=GramE>extract</span> 1 or 2 imputed version original read-count matrix.
-One can run phase-1 of FITs in parallel processing mode also, where multiple trees
-can be <span class=SpellE><span class=GramE>build</span></span> on several
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:204.1pt;
+mso-margin-bottom-alt:auto;mso-margin-top-alt:auto;mso-para-margin-right:17.01gd;
+mso-margin-bottom-alt:auto'><span lang=EN style='font-size:18.0pt;font-family:
+"Arial",sans-serif;mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:204.1pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:17.01gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'>Forest of Imputation Trees (FITs) is a method to impute
+highly sparse and noisy data-sets from single cell epigenome profiling. It has
+been tested on single cell open-chromatin profiles as well as single RNA-seq
+profile. </span><span style='font-size:14.0pt;font-family:"Arial",sans-serif'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:204.1pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:17.01gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'>FITs work in two phases. It has been made so to handle
+very large read-count matrixes and to get better imputation. In phase-1 it
+builds multiple imputation trees and from every tree it <span class=grame><span
+style='font-family:"Arial",sans-serif'>extracts</span></span> 1 or 2 imputed
+version original read-count matrix. One can run phase-1 of FITs in parallel
+processing mode also, where multiple trees can be <span class=grame><span
+style='font-family:"Arial",sans-serif'>build</span></span> using several
 processors.<span style='mso-spacerun:yes'>  </span>After phase-1, the phase-2
 part of FITs is used to accumulate the most relevant imputed version for every
-cell.</span></p>
+cell.</span><span style='font-size:14.0pt;font-family:"Arial",sans-serif'><o:p></o:p></span></p>
 
-<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p>
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:204.1pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:17.01gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></p>
 
-<a href="FITSpython.htm" >Using Python code of FITS (click to open) </a>
-<br>
-<a href="FITsLinux.html" > Using linux executable of FITS (click to open) </a>
-<br>
-<a href="FITSmatlab.htm"> Using Matlab source code	(click to open) </a>
-</p>
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><b><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'>Download FITs<o:p></o:p></span></b></p>
 
-<p class=MsoNormal><span lang=EN><o:p>&nbsp;</o:p></span></p>
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'><span style='mso-field-code:" HYPERLINK \0022\0022 "'><span
+class=MsoHyperlink> <a href="http://reggen.iiitd.edu.in:1207/FITS/FITS.tar.gz">  Standalone executable code for Linux </a> </span></span></span><span
+style='font-size:14.0pt;font-family:"Arial",sans-serif'><o:p></o:p></span></p>
 
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'> <a href="https://github.com/reggenlab/FITSpython">Python code </a></span><span style='font-size:14.0pt;
+font-family:"Arial",sans-serif'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span class=SpellE><span class=spelle><span lang=EN style='font-size:
+14.0pt;font-family:"Arial",sans-serif;mso-ansi-language:EN'> <a href=https://github.com/reggenlab/FITSmatlab> Matlab Code </a><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
+mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
+mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
+72.0pt'><span lang=EN style='font-size:14.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN'><o:p>&nbsp;</o:p></span></p>
+
+
+</div>
 
 </div>
 
