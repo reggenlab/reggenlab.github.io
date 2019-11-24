@@ -54,7 +54,7 @@ style='font-size:14.0pt;line-height:115%'>Using standalone executable for Linux<
 style='font-size:14.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >After downloading
-the file <span class=GramE>FITS.tar.gz<span style='mso-spacerun:yes'>  </span><span
+the file <span class=GramE>FITS.tar.gz <span
 class=SpellE>gunzip</span></span> and <span class=SpellE>untar</span> the file
 as such</span></p>
 
@@ -94,7 +94,7 @@ perform. Row represents sites and column represent samples/cells in csv file.</s
 imputed matrix, you run two phases1 of FITs using command</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
@@ -112,7 +112,7 @@ lang=EN> can be between 2 to 6 but not less than 2, such as </span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>  </span><span class=SpellE>maxLevel</span>=2
 output=imputed.csv</span></p>
 
@@ -122,7 +122,7 @@ many times, as such</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh<span
@@ -165,7 +165,7 @@ FITSPhase1L many times (5 times) before you finally call FITSPhase2L</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1L.sh<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>run_FITSPhase1L.sh input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1L.sh<span
@@ -341,7 +341,7 @@ many times before <span class=GramE>calling<span style='mso-spacerun:yes'> 
 
 <p class=MsoNormal><span ><span style='mso-spacerun:yes'> </span><span
 style='mso-tab-count:2'>                       </span>&gt; FITSPhase1<span
-class=GramE>L<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>L input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
@@ -352,7 +352,7 @@ FITSPhase2L in same folder<o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:36.0pt;text-indent:36.0pt'><span >$FITSPhase2<span
-class=GramE>L<span style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
+class=GramE>L input</span>=unimputed.csv<span
 style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
@@ -366,13 +366,13 @@ using <span class=SpellE>nohup</span></span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
 lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
 -<span class=SpellE>nosplash</span> -r &quot;try FITSPhase1L input='&lt;csv
-file name&gt;<span class=GramE>’<span style='mso-spacerun:yes'>  </span>output</span>=’&lt;imputed.csv&gt;'
+file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
 ; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
 lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
 -<span class=SpellE>nosplash</span> -r &quot;try FITSPhase1L input='&lt;csv
-file name&gt;<span class=GramE>’<span style='mso-spacerun:yes'>  </span>output</span>=’&lt;imputed.csv&gt;'
+file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
 ; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >…………………….</span></p>
@@ -380,7 +380,7 @@ file name&gt;<span class=GramE>’<span style='mso-spacerun:yes'>  </span>output</
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
 lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
 -<span class=SpellE>nosplash</span> -r &quot;try FITSPhase1L input='&lt;csv
-file name&gt;<span class=GramE>’<span style='mso-spacerun:yes'>  </span>output</span>=’&lt;imputed.csv&gt;'
+file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
 ; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
@@ -393,7 +393,7 @@ FITSPhase2L</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
 lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
 -<span class=SpellE>nosplash</span> -r &quot;try FITSPhase2L input='&lt;csv
-file name&gt;<span class=GramE>’<span style='mso-spacerun:yes'>  </span>output</span>=’&lt;imputed.csv&gt;'
+file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
 ; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
@@ -498,7 +498,7 @@ input parameter you can pass in phase2 </span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$python<span
-class=GramE>3<span style='mso-spacerun:yes'>  </span>FITSPhase2.py</span> -<span
+class=GramE>3 FITSPhase2.py</span> -<span
 class=SpellE>i</span> &lt;csv file name&gt; -o &lt;output&gt; -t &lt;<span
 class=SpellE>topk</span> &gt; -c &lt;1/0 takes values either 1 or 0&gt; </span></p>
 
@@ -547,7 +547,7 @@ style='mso-spacerun:yes'> </span>nohup python3 FITSPhase1.py -<span class=SpellE
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:36.0pt;text-indent:36.0pt'><span >$python3 FITSPhase2L.py<span style='mso-spacerun:yes'>  </span>input</span> -i unimputed.csv<span
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:36.0pt'><span >$python3 FITSPhase2L.py input</span> -i unimputed.csv<span
 style='mso-spacerun:yes'>   </span> -o imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
