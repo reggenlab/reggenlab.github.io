@@ -94,8 +94,7 @@ perform. Row represents sites and column represent samples/cells in csv file.</s
 imputed matrix, you run two phases1 of FITs using command</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
@@ -103,8 +102,7 @@ style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
 to use any option, however for faster <span class=SpellE>executation</span> you
 could use option</span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >maxLevel</span></span><span
-lang=EN>= 2<span style='mso-spacerun:yes'>     </span></span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE>maxLevel= 2 </span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >maxLevel</span></span><span
 lang=EN> can be between 2 to 6 but not less than 2, such as </span></p>
@@ -112,8 +110,7 @@ lang=EN> can be between 2 to 6 but not less than 2, such as </span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>  </span><span class=SpellE>maxLevel</span>=2
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv <span class=SpellE>maxLevel</span>=2
 output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >run phase1 of FITS
@@ -122,22 +119,15 @@ many times, as such</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv output=imputed.csv</span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh<span
-style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh input</span>=unimputed.csv  output=imputed.csv</span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh<span
-style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh  input</span>=unimputed.csv  output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >……………………..</span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh<span
-style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1.sh  input</span>=unimputed.csv  output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
@@ -146,9 +136,7 @@ Phase-1 many times, run the phase-2 of FITs</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase2.sh<span
-style='mso-spacerun:yes'>  </span>input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv</span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase2.sh  input</span>=unimputed.csv  output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
@@ -165,8 +153,7 @@ FITSPhase1L many times (5 times) before you finally call FITSPhase2L</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$ <span
-class=GramE>run_FITSPhase1L.sh input</span>=unimputed.csv<span
-style='mso-spacerun:yes'>   </span>output=imputed.csv<o:p></o:p></span></p>
+class=GramE>run_FITSPhase1L.sh input</span>=unimputed.csv  output=imputed.csv<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1L.sh input</span>=unimputed.csv output=imputed.csv<o:p></o:p></span></p>
 
