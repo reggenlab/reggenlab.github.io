@@ -172,7 +172,7 @@ FITSPhase2L in same folder</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >$<span class=GramE>run_FITSPhase1L.sh  input</span>=unimputed.csv  output=imputed.csv<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >$ run_FITSPhase1L.sh  input =unimputed.csv  output=imputed.csv</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
@@ -185,8 +185,8 @@ FITSPhase2L in same folder</span></p>
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><b><span lang=EN
-style='font-size:14.0pt;line-height:115%'>Using <span class=SpellE> <a id="matlab"> Matlab
-source code </a><o:p></o:p></span></b></p>
+style='font-size:14.0pt;line-height:115%'>Using <a id="matlab"> Matlab
+source code </span></b></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
@@ -201,19 +201,18 @@ genomic location i.e. it <span class=GramE>consist</span> of only data on which
 imputation is going to perform. Row represents sites and column represent
 samples/cells in csv file.</span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >Start <span
-class=SpellE>matlab</span> and </span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >Start  matlab and </span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >Addpath</span></span><span
 lang=EN> of FITs using the command</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >&gt;<span
-class=SpellE>addpath</span>(‘path_of_FITs_folder’) ;</span></p>
+class=SpellE>addpath</span>(path_of_FITs_folder) ;</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >Now run phase1 of
-FITs on <span class=SpellE>matlab</span> console</span></p>
+FITs on  matlab console</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span >&gt; FITSPhase1
 input='&lt;csv file name&gt;'</span></p>
@@ -335,19 +334,15 @@ using <span class=SpellE>nohup</span></span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span ><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
-lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
--<span class=SpellE>nosplash</span> -r &quot;try FITSPhase1L input='&lt;csv
-file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
-; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:72.0pt'> nohup matlab -nodisplay -nosplash FITSPhase1L input='&lt;csv
+file name&gt;’ output=’&lt;imputed.csv&gt;'
+;  &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
-lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
--<span class=SpellE>nosplash</span> -r &quot;try FITSPhase1L input='&lt;csv
-file name&gt;<span class=GramE>’ output</span>=’&lt;imputed.csv&gt;'
-; catch; end; quit&quot; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >nohup matlab -nodisplay -nosplash -r  FITSPhase1L input='&lt;csv
+file name&gt; ’ output=’&lt;imputed.csv&gt;'
+; &gt; &lt;name&gt;.txt &amp;<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:72.0pt'><span >…………………….</span></p>
+<p class=MsoNormal style='margin-left:72.0pt'><span >.....</span></p>
 
 <p class=MsoNormal style='margin-left:72.0pt'><span class=SpellE><span >nohup</span></span><span
 lang=EN> <span class=SpellE>matlab</span> -<span class=SpellE>nodisplay</span>
