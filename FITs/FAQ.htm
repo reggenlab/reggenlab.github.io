@@ -37,8 +37,7 @@ mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
 style='mso-ansi-language:EN'>Q1: Why should I use FITs ?<o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
-mso-margin-bottom-alt:auto;margin-left:36.0pt'><b>Answer:</b><span
-lang=EN style='mso-ansi-language:EN'>FITs is meant to impute very sparse and
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b>Answer:</b>FITs is meant to impute very sparse and
 noisy read-count matrices of single-cell open-chromatin profiles. Traditional
 imputation methods are either not able to handle so sparse matrices
 or they cannot recover signal of minor cell types in imbalanced data-sets.
@@ -55,12 +54,11 @@ style='mso-ansi-language:EN'>Q2: I have large
 read-count matrix, how can I use FITs?<o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
-mso-margin-bottom-alt:auto;margin-left:36.0pt'><b>Answer :There are two functions included in FITs which can be used with large count
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b>Answer :</b>There are two functions included in FITs which can be used with large count
 matrices. Those functions are FITSPhase1L and FITSPhase2L. See documentation
 for details of using them. Notice that FITSPhase1L does not need large RAM
 memory however it is slow as it divides that data in to over-lapping chunks and
-imputes them serially. Hence you can run multiple <span
-style='mso-spacerun:yes'> </span>processes of FITSPhase1L at the same time. <o:p></o:p></span></p>
+imputes them serially. Hence you can run multiple processes of FITSPhase1L at the same time. <o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
 mso-margin-bottom-alt:auto;margin-left:36.0pt'><span lang=EN style='mso-ansi-language:
@@ -72,7 +70,7 @@ style='mso-ansi-language:EN'>Q3: What is the format of input read-count matrix
 provided to FITS? <o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
-mso-margin-bottom-alt:auto;margin-left:36.0pt'><b> Answer : The input
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b> Answer :</b> The input
 read-count file has rows as genomic locations and columns as cells. The
 read-counts values are separated by comma (,). If you provide some other
 separator (delimiter) like tab or space, FITS may not be able to read it.
@@ -122,7 +120,7 @@ EN'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
 mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
 style='mso-ansi-language:EN'>
-Q6: If I can tranform read-count to TF motif score using scATAC-seq profile for clustering, why should I use read-counts on peaks for classification ?
+Q6:  If I can tranform read-count to TF motif score using scATAC-seq profile for clustering, why should I use read-counts on peaks for classification ?
 </span>
 <o:p></o:p></span></b></p>
 
@@ -132,7 +130,7 @@ style='mso-ansi-language:EN'>Answer : </span></b>
 There is no doubt that transforming to TF-motif score reduces the size of scATAC-seq profile and probably sparsity also. However it may not always work,
 as due to very high sparsity you could get very low and noisy scores for cell-type-specific motifs for every cell. In that case, imputation could help even in adding more information to
 TF-motif score also. Moreover, just using read-counts on peaks directly for classification provides you more options for feature selection. 
- <b><o:p></o:p></b></span></p>
+ <b><o:p></o:p></span></b></p>
 
 
 
