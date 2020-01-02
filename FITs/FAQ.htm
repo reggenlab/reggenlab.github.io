@@ -17,7 +17,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 mso-no-proof:yes'><img width=1200 height=250 id="_x0000_i1025" src=FITs.jpg
 alt=Logo></span><span style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></h1>
 
-
+v
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:170.15pt;
 mso-margin-bottom-alt:auto;margin-left:72.0pt;mso-margin-top-alt:auto;
 mso-para-margin-right:14.18gd;mso-margin-bottom-alt:auto;mso-para-margin-left:
@@ -97,6 +97,49 @@ lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'> </span>If
 you are using <span class=SpellE>linux</span>, we have already provided
 pre-compiled executable for <span class=SpellE>linux</span>. Though this is big
 file, but it removes the headache of dependencies etc. <b><o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><span lang=EN style='mso-ansi-language:
+EN'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
+style='mso-ansi-language:EN'>Q5:<span style='mso-spacerun:yes'>  
+Can I try FITs for other single-cell profiles like expression, DNAse-seq, MNAse-seq etc?
+</span>
+<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
+style='mso-ansi-language:EN'>Answer : </span></b><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'> </span>
+Yes you can apply FITs on other single-cell profiles. Especially for highly sparse and imbalanced read-count data FITs may proove to more usefull
+ <b><o:p></o:p></b></span></p>
+
+
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><span lang=EN style='mso-ansi-language:
+EN'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
+style='mso-ansi-language:EN'>
+Q6: If I can tranform read-count to TF motif score using scATAC-seq profile for clustering, why should I use read-counts on peaks for classification ?
+</span>
+<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
+mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
+style='mso-ansi-language:EN'>Answer : </span></b><span
+lang=EN style='mso-ansi-language:EN'><span style='mso-spacerun:yes'> </span>
+There is no doubt that transforming to TF-motif score reduces the size of scATAC-seq profile and probably sparsity also. However it may not always work,
+as due to very high sparsity you could get very low and noisy scores for cell-type-specific motifs for every cell. In that case, imputation could help even in adding more information to
+TF-motif score also. Moreover, just using read-counts on peaks directly for classification provides you more options for feature selection. 
+ <b><o:p></o:p></b></span></p>
+
+
+
 
 <p class=MsoNormal style='mso-margin-top-alt:auto;margin-right:136.1pt;
 mso-margin-bottom-alt:auto;margin-left:36.0pt'><b><span lang=EN
