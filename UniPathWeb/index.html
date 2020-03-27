@@ -1,4 +1,4 @@
-
+f
 <!DOCTYPE HTML>
 
 <html>
@@ -83,7 +83,10 @@
 	                              
 								  <p>For other applications of UniPath, we suggest users to install DrImpute, ggplot2 and reshape2 packages. Also, we have used EmpiricalBrownsMethod package from R.
 	
-								
+								  <p><font size=5><b> We have included codes and datasets for replicating results and figures from the paper. These can be downloaded from the Download button. To download user must provide details as follows: User id: reggen and password  unipath@123	  </p></b>	</font>				  
+
+							
+								  
 								<h3 style="color:green;">Usage and workflow</h3><p>For single cell data analysis, UniPath package comes with a precompiled mouse and human null model data.  Also, for transformation of single cell gene expression data into pathway or gene-set enrichment scores, the package contains pathway annotation and gene set marker files.
 								The analysis of single cells starts by loading following data files:<br/>
 						
@@ -150,8 +153,8 @@
 									<a class="link"><img src="images/Pic1.jpeg" alt="" /></a>
 									<p>Considering mouse lung developmental data from Treutlein, Barbara et al., we performed pseudo temporal ordering to trace developmental hierarchy of lung from epithelial cells at 4 different stages. </br>
 
-									<p>Another example is of scRNAseq time course differentiation data of human embryonic stem cells from study Chu et al (GEO ID: GSE75748). We have included precompiled pathway scores of this study, which can be directly used for performing pseudo temporal ordering as shown in example below. </p>
-									
+									<p>Another example is of scRNAseq time course differentiation data of human embryonic stem cells from study Chu et al (GEO ID: GSE75748). We have included precompiled pathway scores of this study in the package, which can be directly used for performing pseudo temporal ordering as shown in example below.</p>
+									<p><b> This code can be used for replicating Figure 4b from the paper. </b></p>
 									<pre><code><font face="arial" color="black">library(UniPath)<br>data("GSE75748pathwayscores")<br>distclust = dist_clust(GSE75748pathwayscores,6)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(GSE75748pathwayscores,4)<br>KNN = KNN(GSE75748pathwayscores,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)<br>vertex_color = c("yellow","Red","green","blue","black","magenta")<br>cell_labels  = data.frame(c(rep("0h",92),rep("12h",102),rep("24h",66),rep("36h",172),rep("72h",138),rep("96h",188)))<br>set.seed(100)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)</pre></code></font>
 									<a class="link"><img src="images/pic11.jpeg" alt="" /></a>
 
