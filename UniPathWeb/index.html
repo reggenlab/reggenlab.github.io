@@ -213,8 +213,8 @@ f
 									<br>vertex_color  = c( 'green' , 'red')<br>cell_labels = data.frame(c(rep("NSCLC TS cells",87),rep("Adherent NSCLC cells",75)))<br>set.seed(50)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)
 									<br>##Showing gradient of a pathway on mst<br>set.seed(50)<br>coltri = gradient(scores$adjpva, "GO_REGULATION_OF_ICOSANOID_SECRETION")<br>UniPath::mst.plot.mod(corr_mst, vertex.color = coltri,mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 4,e.size=0.005,mst.e.size = 0.005)</br></pre></code></font>
 									<figure class="half" style="display:flex">
-									<a class="link"><img src="images/pic9.jpg"></a>
-									<a class="link"><img  src="images/pic10.jpg"></a>
+									<a class="link"><img src="images/pic9.jpeg"></a>
+									<a class="link"><img  src="images/pic10.jpeg"></a>
 									</figure>
 									<p>Above figure shows an increase in the gradient of a pathway in NSCLC TS cells. </p>
 									
