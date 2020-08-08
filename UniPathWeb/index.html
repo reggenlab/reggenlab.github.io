@@ -179,7 +179,7 @@ f
 									</figure>
 								    <p>Above plots shows the separation of three classes in pathway space. </p>
 
-									<p>UniPath can also help in cell detection based on cell specific gene marker sets which are available in this package. Considering data from study id GSE81861, we have computed gene set enrichment scores using cell type specific marker file as shown in example below.User has an option to change the threshold value. 
+									<p>UniPath can also help in cell detection based on cell specific gene marker sets which are available in this package. Considering data from study id GSE81861, we have computed gene set enrichment scores using cell type specific marker file as shown in example below. User has an option to change the threshold value. 
 									<br><pre><code><font face="arial" color="black">library(UniPath)<br>data("human_null_model")<br>data("GSE81861")<br>data("human_markers")<br>Pval = binorm(human_null_data)<br>combp_ref = combine(human_markers,human_null_data,rownames(human_null_data),Pval,thr=10)<br>Pval1 = binorm(data)<br>combp = combine(human_markers,data,rownames(data),Pval1,thr=10)<br>scores = adjust(combp,combp_ref)</pre></code></font>
                                     <p> In case of scATAC-seq profiles cell detection, human_markers_scATACseq.RData marker file can be used. </p>
 									<h3 style="color:green;">Differential pathway analysis </h3>
