@@ -204,19 +204,7 @@
 
 
 									
-									<h3 style="color:green;">Continuum score for pathway on minimum spanning tree</h3>
-									<p>UniPath also helps in visualization of gradient of pathway on minimum spanning tree, thus showing lineage potency as well other properties such as tumorigenicity etc. We have included lung cancer data for the tutorial. In the example given below, we are converting lung cancer gene expression data into pathway scores and plotting minimum spanning tree. Using this minimum spanning tree we are showing gradient of GO_REGULATION_OF_ICOSANOID_SECRETION pathway using its absolute p-value. </p>
-									<pre><code><font face="arial" color="black">library(UniPath)
-									<br>##Load Lung cancer data<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")
-                                    <br>Pval = binorm(human_null_data)<br>combp_ref = combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval,thr=2)<br>Pval1 = binorm(expression_matrix)<br>combp = combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1,thr=2)<br>scores = adjust(combp,combp_ref)
-									<br>distclust = dist_clust(scores$adjpvalog,2)<br>dist = distclust$distance<br>clusters = distclust$clusters<br>index = index(scores$adjpvalog,5)<br>KNN = KNN(scores$adjpvalog,index,clusters)<br>class = class1(clusters,KNN)<br>distance = distance(dist,class,clusters)<br>corr_mst = minimum_spanning_tree(distance)
-									<br>vertex_color  = c( 'green' , 'red')<br>cell_labels = data.frame(c(rep("NSCLC TS cells",87),rep("Adherent NSCLC cells",75)))<br>set.seed(50)<br>UniPath::mst.plot.mod(corr_mst, vertex.color = vertex_color[cell_labels[,1]],mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 3,e.size=0.005,mst.e.size = 0.005)<br>legend("topright", legend = sort(unique(cell_labels[,1])) , col = vertex_color,pch=20, box.lty=0,cex=1,pt.cex=2,horiz=F)
-									<br>##Showing gradient of a pathway on mst<br>set.seed(50)<br>coltri = gradient(scores$adjpva, "GO_REGULATION_OF_ICOSANOID_SECRETION")<br>UniPath::mst.plot.mod(corr_mst, vertex.color = coltri,mst.edge.col="black",bg="white",layout.function="layout.kamada.kawai",v.size = 4,e.size=0.005,mst.e.size = 0.005)</br></pre></code></font>
-									<figure class="half" style="display:flex">
-									<a class="link"><img src="images/pic9.jpeg"></a>
-									<a class="link"><img  src="images/pic10.jpeg"></a>
-									</figure>
-									<p>Above figure shows an increase in the gradient of a pathway in NSCLC TS cells. </p>
+									
 									
 									<br> We have included some results for pseudo temporal ordering on simulated datastes which can be assessed using following link. </br> <a href="index1.html"><span><font color="blue" face="arial">Results for simulated datasets</span></a></font>
 
