@@ -110,10 +110,7 @@
 								<h3 style="color:green;">Adjusting of P-values</h3>
 								<p>To avoid unwanted effects of background housekeeping genes and for highlighting cell type specific gene-set activities, we adjust p-values using null model. This adjusted p-value matrix is referred to as pathway scores.</p>
 								<pre><code><font face="arial" color="black">scores = adjust(combp,combp_ref)</pre></code></font><p> This will return a list of three matrices one with absolute p-values, second one with raw adjusted p-values and third one is log transformed adjusted p-values. </p>
-						        <p>In a similar way, we can transform human gene expression into pathway scores using the human null model as shown in the example below.
-								 We have used human lung cancer expression data here which is a part of package. </p>
-								<pre><code><font face="arial" color="black">library(UniPath)<br>data("human_null_model")<br>data("c5.bp.v6.0.symbols")<br>data("lungcancer_expression")<br>Pval = binorm(human_null_data)<br>combp_ref <- combine(c5.bp.v6.0.symbols,human_null_data,rownames(human_null_data),Pval,thr=2)<br>Pval1 = binorm(expression_matrix)<br>combp <- combine(c5.bp.v6.0.symbols,expression_matrix,rownames(expression_matrix),Pval1,thr=2)<br>scores = adjust(combp,combp_ref)</pre></code></br></font>
-
+						        
 						</div>
 <!-- Section -->
 						<div class="inner">
